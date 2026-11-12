@@ -1,0 +1,27 @@
+{
+  "name": "neondeck",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check:manifest": "node scripts/check-manifest.mjs",
+    "verify": "npm run typecheck && npm test && npm run build && npm run check:manifest",
+    "build:firefox": "npm run build && node scripts/build-firefox.mjs",
+    "package": "npm run verify && node scripts/build-firefox.mjs && node scripts/package.mjs"
+  },
+  "dependencies": {
+    "preact": "^11.2.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "@types/chrome": "^0.3.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

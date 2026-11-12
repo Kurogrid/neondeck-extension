@@ -1,0 +1,144 @@
+{
+  "bookmarks": [
+    {
+      "id": "1",
+      "title": "City News",
+      "url": "https://github.com",
+      "category": "daily",
+      "icon": "News"
+    },
+    {
+      "id": "2",
+      "title": "Corp Portal",
+      "url": "https://stackoverflow.com",
+      "category": "work",
+      "icon": "Work"
+    },
+    {
+      "id": "3",
+      "title": "Late Night",
+      "url": "https://youtube.com",
+      "category": "entertainment",
+      "icon": "Skull"
+    },
+    {
+      "id": "4",
+      "title": "Forum",
+      "url": "https://reddit.com",
+      "category": "social",
+      "icon": "Shield"
+    },
+    {
+      "id": "5",
+      "title": "Feed",
+      "url": "https://twitter.com",
+      "category": "social",
+      "icon": "Security"
+    },
+    {
+      "id": "6",
+      "title": "Mail",
+      "url": "https://gmail.com",
+      "category": "work",
+      "icon": "Brain"
+    }
+  ],
+  "categoryOrder": [
+    "daily",
+    "work",
+    "entertainment",
+    "social",
+    "other"
+  ],
+  "searchEngines": [
+    {
+      "id": "default",
+      "name": "Default",
+      "url": "chrome-extension-search://",
+      "placeholder": "Search with default engine...",
+      "visible": true
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "url": "https://www.google.com/search?q=",
+      "placeholder": "Search the Net...",
+      "visible": true
+    },
+    {
+      "id": "ai",
+      "name": "ChatGPT",
+      "url": "https://www.chatgpt.com/?q=",
+      "placeholder": "Query an AI...",
+      "visible": true
+    },
+    {
+      "id": "ai2",
+      "name": "Perplex",
+      "url": "https://www.perplexity.ai/search?q=",
+      "placeholder": "Initiate neural search...",
+      "visible": false
+    },
+    {
+      "id": "brave3",
+      "name": "Research",
+      "url": "https://search.brave.com/ask?enable_research=true&q=",
+      "placeholder": "Research with an AI...",
+      "visible": true
+    }
+  ],
+  "activeSearchEngine": "default",
+  "weatherLocation": {
+    "name": "Neon Bay",
+    "latitude": 37.7749,
+    "longitude": -122.4194
+  },
+  "temperatureUnit": true,
+  "timeFormat": true,
+  "background": "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  "backgroundMediaType": "image",
+  "backgroundBrightness": 100,
+  "backgroundVignette": true,
+  "userName": "Runner ",
+  "colorTheme": "edgerunners",
+  "widgets": [
+    {
+      "id": "weather-1",
+      "type": "weather",
+      "enabled": true
+    },
+    {
+      "id": "worldclock-1",
+      "type": "worldclock",
+      "enabled": true
+    },
+    {
+      "id": "scratchpad-1",
+      "type": "scratchpad",
+      "enabled": false
+    },
+    {
+      "id": "tasklist-1",
+      "type": "tasklist",
+      "enabled": false
+    },
+    {
+      "id": "rss-1",
+      "type": "rss",
+      "enabled": false
+    }
+  ],
+  "displayPreferences": {
+    "showGreeting": true,
+    "showTime": true,
+    "showDate": true,
+    "showSearchBar": true,
+    "showQuotes": true,
+    "showNetlinks": true,
+    "showWidgets": true
+  },
+  "scanLinesMode": "default",
+  "tabTitle": "Night Deck",
+  "selectedFont": "default",
+  "tabFavicon": "Terminal"
+}

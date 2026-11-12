@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "chrome_url_overrides": { "newtab": "index.html" },
+  "permissions": ["storage"],
+  "optional_permissions": ["favicon", "bookmarks"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self'; connect-src https://api.open-meteo.com https://geocoding-api.open-meteo.com; worker-src 'self'"
+  }
+}

@@ -1,0 +1,16 @@
+/*
+ * Theme tokens. --primary = main UI highlight, --secondary = holo/city light, --accent / --accent-2 = contrast accents.
+ * 2026-11-12 [claude], at the user's request: Neon Pulse re-tuned (yellow highlight, electric cyan lights,
+ * pink + purple accents) and Acid Orchid (purple + acid green) added. [antigravity] may refine values.
+ */
+:root, [data-theme='edgerunners'] {
+  --bg:#07091a; --surface:#0f1330; --primary:#fcee0a; --secondary:#00f0ff; --accent:#ff2e97; --accent-2:#b14bff;
+  --text:#dff9ff; --muted:#7c8db3; --danger:#ff3b5c; --glow:rgba(0, 240, 255, 0.35); --chamfer:12px;
+}
+[data-theme='arasaka'] { --bg:#0b0707; --surface:#1a0e0e; --primary:#ff2a2a; --secondary:#d9d9d9; --accent:#ff7a00; --accent-2:#ff7a00; --text:#ffecec; --muted:#9a6a6a; --danger:#ff0033; --glow:rgba(255, 42, 42, 0.3); }
+[data-theme='ghost'] { --bg:#04110d; --surface:#0a1f19; --primary:#39ffb0; --secondary:#00d0ff; --accent:#a6ffea; --accent-2:#00d0ff; --text:#d9fff2; --muted:#5d9a88; --danger:#ff5577; --glow:rgba(57, 255, 176, 0.3); }
+[data-theme='orchid'] {
+  --bg:#0c0614; --surface:#1a0d29; --primary:#c45cff; --secondary:#7dff3a; --accent:#e18bff; --accent-2:#39ff14;
+  --text:#f1e6ff; --muted:#8f76ad; --danger:#ff4d6d; --glow:rgba(196, 92, 255, 0.35);
+}
+html, body { margin:0; height:100%; background:var(--bg); color:var(--text); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; }
