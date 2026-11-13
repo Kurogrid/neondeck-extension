@@ -1,9 +1,9 @@
 import { bool, isObj, num, oneOf } from '../../core/guards';
 
 /**
- * Pomodoro logic (owner [claude]). Timestamp based, no `chrome.alarms`: the timer only
+ * Pomodoro logic. Timestamp based, no `chrome.alarms`: the timer only
  * advances while a NEONDECK tab is open, but closing and reopening the tab loses nothing
- * because state is stored as an absolute end time. The UI is [antigravity]'s work.
+ * because state is stored as an absolute end time. The view is a separate layer.
  */
 export const PHASES = ['work', 'short', 'long'] as const;
 export type Phase = (typeof PHASES)[number];

@@ -33,6 +33,13 @@ const steps: Record<number, (o: Raw) => Raw> = {
     const engines = o.search.engines.filter((e) => !(isObj(e) && typeof e.url === 'string' && ours.has(e.url)));
     return { ...o, search: { ...o.search, engines } };
   },
+  // v6: neutral theme ids (old ids came from the reference extension's export format).
+  5: (o) => {
+    if (!isObj(o.theme)) return o;
+    const renamed: Record<string, string> = { edgerunners: 'pulse', arasaka: 'protocol', ghost: 'phantom' };
+    const id = typeof o.theme.id === 'string' ? renamed[o.theme.id] : undefined;
+    return id ? { ...o, theme: { ...o.theme, id } } : o;
+  },
 };
 
 export interface MigrationResult { data: unknown; fromVersion: number; newer: boolean }

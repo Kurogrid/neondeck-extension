@@ -5,7 +5,7 @@ import type { WidgetProps } from '../types';
 import { PHASES, advance, formatMs, pause, remaining, reset, setPhase, skip, start, type Phase } from './logic';
 
 /**
- * Functional placeholder view. [antigravity] owns the final Pomodoro UI and animations (PLAN Faz 3);
+ * Functional placeholder view, to be replaced by the final Pomodoro UI and animations;
  * keep using the pure functions from ./logic so behaviour and stored state stay compatible.
  */
 export function PomodoroView({ L, config, setConfig, editing }: WidgetProps<'pomodoro'>) {

@@ -1,6 +1,6 @@
 # Chrome Web Store listing: English
 
-> Draft by [claude], 2026-11-12. Lines marked **(after Faz 2)** describe [antigravity]'s visual work; check them against the final build before submitting.
+> Draft, 2026-11-12. Lines marked **(after Faz 2)** describe upcoming visual work; check them against the final build before submitting.
 
 ## Name
 NEONDECK

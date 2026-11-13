@@ -1,5 +1,5 @@
 /**
- * Placeholder icon set (stroke icons, 24x24). [antigravity] replaces these with the final
+ * Placeholder icon set (stroke icons, 24x24), to be replaced by the final
  * ~40-icon HUD set in Faz 2; keep the `name` keys (or extend ICON_ALIASES) so stored links keep working.
  */
 const PATHS: Record<string, string> = {

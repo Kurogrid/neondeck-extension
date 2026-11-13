@@ -1,4 +1,4 @@
-// Firefox build (owner [claude]): copies dist/ to dist-firefox/ and rewrites the manifest for Firefox/AMO.
+// Firefox build: copies dist/ to dist-firefox/ and rewrites the manifest for Firefox/AMO.
 // Run after `vite build` (npm run build:firefox does both).
 import { cpSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 

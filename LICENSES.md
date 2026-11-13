@@ -21,7 +21,7 @@ Build and test tools (Vite, TypeScript, Vitest, @preact/preset-vite, @types/chro
 No fonts, sounds, images or videos from third parties are bundled yet.
 
 ## To fill in later
-[antigravity] adds any sound loops, fonts or images used in Faz 2/3 here (source URL, author, license, and which file uses it) before release. Only licenses that allow redistribution inside a free extension are acceptable (e.g. CC0, CC BY with attribution, OFL for fonts).
+Any sound loops, fonts or images added later are listed here (source URL, author, license, and which file uses it) before release. Only licenses that allow redistribution inside a free extension are acceptable (e.g. CC0, CC BY with attribution, OFL for fonts).
 
 ## Services used at runtime (not bundled)
 | Service | Used for | Terms |

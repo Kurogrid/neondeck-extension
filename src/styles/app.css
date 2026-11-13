@@ -1,6 +1,6 @@
 /*
- * Functional base styles for Faz 1 (layout, states, a11y). Owner: [claude].
- * Visual identity (HUD ornaments, CRT/glitch layers, final typography) is [antigravity]'s
+ * Functional base styles (layout, states, a11y).
+ * Visual identity (HUD ornaments, CRT/glitch layers, final typography) is the theme layer's
  * Faz 2 work in src/theme/ — override freely there; class names are the contract.
  */
 :root { --chamfer: 12px; --gap: 16px; --radius-focus: 2px; color-scheme: dark; }
@@ -222,7 +222,7 @@ button, input, select { font: inherit; color: inherit; }
 .nd-ai__item { display: flex; align-items: center; gap: 2px; }
 .nd-ai__link { text-decoration: none; }
 
-/* pomodoro (placeholder until [antigravity] UI) */
+/* pomodoro (placeholder until the final UI) */
 .nd-pm { display: grid; gap: 8px; justify-items: center; text-align: center; }
 .nd-pm__phases { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
 .nd-pm__phases [aria-pressed='true'] { background: color-mix(in srgb, var(--primary) 20%, transparent); }

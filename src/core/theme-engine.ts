@@ -4,7 +4,7 @@ export interface RootLike { dataset: Record<string, string | undefined>; lang: s
 
 /**
  * Exposes the visual settings as data-* attributes on <html>.
- * Styling hooks for [antigravity]: [data-theme], [data-scanlines], [data-chamfer], [data-glitch], [data-power], [data-font].
+ * Styling hooks for the theme layer: [data-theme], [data-scanlines], [data-chamfer], [data-glitch], [data-power], [data-font].
  */
 export function applyTheme(root: RootLike, s: Settings): void {
   root.dataset.theme = s.theme.id;

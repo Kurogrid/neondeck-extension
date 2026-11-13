@@ -1,6 +1,6 @@
 # Firefox Add-ons (addons.mozilla.org) submission: NEONDECK 0.1.0 alpha
 
-> Prepared by [claude], 2026-11-12. Copy each block into the matching field of the AMO Developer Hub.
+> Prepared 2026-11-12. Copy each block into the matching field of the AMO Developer Hub.
 
 ## Files to upload
 - **Add-on file**: `release/neondeck-0.1.0-firefox.zip`

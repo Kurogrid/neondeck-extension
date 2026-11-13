@@ -1,4 +1,4 @@
-// Release packages (owner [claude]). Run via `npm run package` (verify + Firefox build run first).
+// Release packages. Run via `npm run package` (verify + Firefox build run first).
 //   release/neondeck-<v>-chrome.zip   Chrome Web Store upload (from dist/)
 //   release/neondeck-<v>-firefox.zip  addons.mozilla.org upload (from dist-firefox/)
 //   release/neondeck-<v>-source.zip   source for AMO reviewers (they rebuild and diff; see BUILD.md)

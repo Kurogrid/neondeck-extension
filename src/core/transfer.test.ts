@@ -36,7 +36,7 @@ describe('Cyberstart import (full reference export)', () => {
   it('maps profile, display and theme', () => {
     expect(s.profile.userName).toBe('Runner');
     expect(s.display).toMatchObject({ timeFormat: '24h', showSearch: true, showWidgets: true });
-    expect(s.theme).toMatchObject({ id: 'edgerunners', scanlines: 'default' });
+    expect(s.theme).toMatchObject({ id: 'pulse', scanlines: 'default' });
     expect(s.tab).toEqual({ title: 'Night Deck', icon: 'terminal' });
   });
   it('maps widgets, keeps their order and adds NEONDECK-only widgets', () => {
@@ -89,6 +89,10 @@ describe('NEONDECK backup', () => {
 });
 
 describe('migrate', () => {
+  it('v6 renames the old theme ids', () => {
+    for (const [from, to] of [['edgerunners', 'pulse'], ['arasaka', 'protocol'], ['ghost', 'phantom'], ['orchid', 'orchid']])
+      expect(importJson(JSON.stringify({ schemaVersion: 5, theme: { id: from } })).settings.theme.id).toBe(to);
+  });
   it('v5 removes the Claude / Gemini engines NEONDECK added, keeps user ones', () => {
     const v4 = { schemaVersion: 4, search: { active: 'claude', engines: [
       { id: 'google', name: 'Google', url: 'https://www.google.com/search?q=', visible: true },

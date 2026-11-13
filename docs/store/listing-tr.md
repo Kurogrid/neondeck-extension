@@ -1,6 +1,6 @@
 # Chrome Web Store mağaza metni: Türkçe
 
-> Taslak: [claude], 12.11.2026. **(Faz 2 sonrası)** işaretli satırlar [antigravity]'nin görsel işini anlatır; göndermeden önce son sürümle karşılaştır.
+> Taslak, 12.11.2026. **(Faz 2 sonrası)** işaretli satırlar sonraki görsel işi anlatır; göndermeden önce son sürümle karşılaştır.
 
 ## Ad
 NEONDECK
