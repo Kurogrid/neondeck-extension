@@ -1,5 +1,7 @@
 # NEONDECK
 
+[![CI](https://github.com/Kurogrid/neondeck-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/Kurogrid/neondeck-extension/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-c6ff3d.svg)](LICENSE)
+
 A cyberpunk HUD new tab dashboard for Firefox and Chrome: big clock, multi-engine search, netlinks with keyboard shortcuts, and a side panel of focus widgets. Private by design: no account, no tracking, no remote code.
 
 > **Status: 0.1.0 alpha.** The core works. The full visual identity (animated backgrounds, CRT and glitch effects, final icon set, ambient sound) is still being built.
