@@ -40,6 +40,13 @@ const steps: Record<number, (o: Raw) => Raw> = {
     const id = typeof o.theme.id === 'string' ? renamed[o.theme.id] : undefined;
     return id ? { ...o, theme: { ...o.theme, id } } : o;
   },
+  // v7: back to the original theme ids (user decision 2026-11-13; animated scenes are built per theme).
+  6: (o) => {
+    if (!isObj(o.theme)) return o;
+    const renamed: Record<string, string> = { pulse: 'edgerunners', protocol: 'arasaka', phantom: 'ghost' };
+    const id = typeof o.theme.id === 'string' ? renamed[o.theme.id] : undefined;
+    return id ? { ...o, theme: { ...o.theme, id } } : o;
+  },
 };
 
 export interface MigrationResult { data: unknown; fromVersion: number; newer: boolean }

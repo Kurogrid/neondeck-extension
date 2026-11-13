@@ -8,10 +8,10 @@ describe('safeUrl', () => {
   it('rejects non-strings', () => expect(safeUrl(42)).toBeNull());
 });
 describe('sanitizeSettings', () => {
-  it('returns defaults for garbage', () => expect(sanitizeSettings('x').theme.id).toBe('pulse'));
+  it('returns defaults for garbage', () => expect(sanitizeSettings('x').theme.id).toBe('edgerunners'));
   it('drops unsafe netlinks', () => {
     const s = sanitizeSettings({ netlinks: { items: [{ title: 'a', url: 'javascript:1' }, { title: 'b', url: 'https://b.com' }] } });
     expect(s.netlinks.items).toHaveLength(1);
   });
-  it('rejects unknown theme', () => expect(sanitizeSettings({ theme: { id: 'evil' } }).theme.id).toBe('pulse'));
+  it('rejects unknown theme', () => expect(sanitizeSettings({ theme: { id: 'evil' } }).theme.id).toBe('edgerunners'));
 });

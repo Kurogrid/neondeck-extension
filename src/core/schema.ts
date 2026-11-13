@@ -1,8 +1,8 @@
 import { cleanWidgetConfig } from '../widgets/configs';
 
-export const SCHEMA_VERSION = 6;
+export const SCHEMA_VERSION = 7;
 
-export const THEME_IDS = ['pulse', 'protocol', 'phantom', 'orchid'] as const;
+export const THEME_IDS = ['edgerunners', 'arasaka', 'ghost', 'orchid'] as const;
 export type ThemeId = (typeof THEME_IDS)[number];
 export const LOCALES = ['en', 'tr'] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -68,7 +68,7 @@ export const defaultSettings = (locale: Locale = browserLocale()): Settings => (
   schemaVersion: SCHEMA_VERSION,
   profile: { userName: '', locale },
   display: { timeFormat: '24h', showGreeting: true, showTime: true, showDate: true, showSearch: true, showQuotes: true, showNetlinks: true, showWidgets: true },
-  theme: { id: 'pulse', scanlines: 'default', glitch: true, chamfer: 'md', font: 'default', lowPower: false },
+  theme: { id: 'edgerunners', scanlines: 'default', glitch: true, chamfer: 'md', font: 'default', lowPower: false },
   background: { kind: 'scene', sceneId: 'neon-grid', brightness: 100, vignette: true },
   audio: { uiSfx: false, volume: 0.4, ambient: { track: 'off', volume: 0.3 } },
   search: { engines: defaultEngines(), active: 'google' },

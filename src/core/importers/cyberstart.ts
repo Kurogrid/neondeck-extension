@@ -89,9 +89,7 @@ export function convertCyberstart(o: Record<string, unknown>): { data: Record<st
   for (const d of defaultWidgets()) if (!widgets.some((w) => w.type === d.type)) widgets.push({ ...d, order: 200 + d.order });
 
   const dp = isObj(o.displayPreferences) ? o.displayPreferences : {};
-  // Cyberstart theme names -> NEONDECK theme ids.
-  const CYBERSTART_THEMES: Record<string, (typeof THEME_IDS)[number]> = { edgerunners: 'pulse', arasaka: 'protocol', ghost: 'phantom' };
-  const theme = typeof o.colorTheme === 'string' ? CYBERSTART_THEMES[o.colorTheme] : undefined;
+  const theme = THEME_IDS.find((t) => t === o.colorTheme);
 
   return {
     warnings: [...new Set(warnings)],

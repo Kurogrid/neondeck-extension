@@ -96,7 +96,7 @@ describe('theme engine', () => {
     const s = defaultSettings('tr');
     s.theme.lowPower = true;
     applyTheme(root, s);
-    expect(root).toEqual({ lang: 'tr', dataset: { theme: 'pulse', scanlines: 'default', chamfer: 'md', glitch: 'on', power: 'low', font: 'default' } });
+    expect(root).toEqual({ lang: 'tr', dataset: { theme: 'edgerunners', scanlines: 'default', chamfer: 'md', glitch: 'on', power: 'low', font: 'default' } });
   });
 });
 
@@ -106,10 +106,9 @@ describe('i18n', () => {
     expect(categoryLabel('tr', 'daily')).toBe('Günlük');
     expect(categoryLabel('en', 'side-projects')).toBe('side projects');
   });
-  it('never shows a brand name as a theme label', () => {
+  it('never shows a brand name as a visible theme label', () => {
     for (const l of ['en', 'tr'] as const) for (const id of THEME_IDS) {
       expect(t(l, `theme_${id}`)).not.toMatch(/edgerunner|arasaka|ghost in the shell|cyberpunk/i);
-      expect(id).not.toMatch(/edgerunner|arasaka|ghost/i);
     }
   });
 });
