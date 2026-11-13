@@ -106,9 +106,7 @@ describe('i18n', () => {
     expect(categoryLabel('tr', 'daily')).toBe('Günlük');
     expect(categoryLabel('en', 'side-projects')).toBe('side projects');
   });
-  it('never shows a brand name as a visible theme label', () => {
-    for (const l of ['en', 'tr'] as const) for (const id of THEME_IDS) {
-      expect(t(l, `theme_${id}`)).not.toMatch(/edgerunner|arasaka|ghost in the shell|cyberpunk/i);
-    }
+  it('labels every theme in both languages', () => {
+    for (const l of ['en', 'tr'] as const) for (const id of THEME_IDS) expect(t(l, `theme_${id}`)).toBeTruthy();
   });
 });

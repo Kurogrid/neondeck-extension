@@ -12,7 +12,7 @@ _Türkçe özet aşağıda._
 - **Command deck**: greeting, clock and date (12/24-hour), search with Google, DuckDuckGo, Bing, Brave, ChatGPT, Perplexity, YouTube or your own engine. `/` focuses search, `1`–`9` open your top links.
 - **Netlinks**: saved sites as cards in collapsible categories; import browser bookmarks (optional permission).
 - **Widgets** (side panel, drag to reorder): weather (Open-Meteo), world clock, scratchpad, tasks and habits with streaks, Pomodoro, AI quick links.
-- **Themes**: Neon Pulse, Red Protocol, Phantom Signal, Acid Orchid.
+- **Themes**: Edgerunners, Arasaka, Ghost, Acid Orchid.
 - **Data**: everything stays in local extension storage; JSON export/import (also imports exports from the Cyberstart extension).
 - **Languages**: English, Turkish.
 
