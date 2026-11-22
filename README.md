@@ -17,7 +17,7 @@ _Türkçe özet aşağıda._
 - **Languages**: English, Turkish.
 
 ## Install
-- **Firefox**: on addons.mozilla.org (listing pending review).
+- **Firefox**: [NEONDECK on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/neondeck/) (alpha, marked experimental).
 - **From source**: build it (below), then
   - Firefox: `about:debugging` → This Firefox → Load Temporary Add-on → `dist-firefox/manifest.json`
   - Chrome: `chrome://extensions` → Developer mode → Load unpacked → `dist/`
