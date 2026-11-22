@@ -1,0 +1,425 @@
+/*
+ * Atmospheric effect layers for NEONDECK:
+ * vignette, CRT scanline modes (off / subtle / default / heavy), and glitch hooks.
+ * Scanlines and glitch layers shut down cleanly under prefers-reduced-motion and [data-power='low'].
+ */
+
+/* ---------- vignette ---------- */
+.nd-fx-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 72% at 50% 46%,
+    transparent 38%,
+    color-mix(in srgb, var(--bg) 52%, transparent) 78%,
+    color-mix(in srgb, var(--bg) 88%, #000) 100%
+  );
+  transition: opacity 0.25s ease;
+}
+
+.nd-fx-vignette[data-vignette='off'] {
+  opacity: 0;
+}
+
+/* ---------- CRT scanlines ---------- */
+.nd-fx-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.nd-fx-scanlines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 110px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--secondary) 45%, #fff),
+    transparent
+  );
+  opacity: 0;
+  will-change: transform;
+}
+
+:root[data-scanlines='off'] .nd-fx-scanlines {
+  display: none;
+}
+
+:root[data-scanlines='subtle'] .nd-fx-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0, 0, 0, 0.14) 2px 3px
+  );
+}
+
+:root[data-scanlines='subtle'] .nd-fx-scanlines::after {
+  display: none;
+}
+
+:root[data-scanlines='default'] .nd-fx-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0, 0, 0, 0.24) 2px 3px
+  );
+}
+
+:root[data-scanlines='default'] .nd-fx-scanlines::after {
+  opacity: 0.05;
+  animation: nd-crt-sweep 8.5s linear infinite;
+}
+
+:root[data-scanlines='heavy'] .nd-fx-scanlines {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgba(0, 0, 0, 0.36) 2px 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 0, 80, 0.025) 0 1px,
+      rgba(0, 240, 255, 0.025) 1px 2px,
+      transparent 2px 4px
+    );
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-scanlines='heavy'] .nd-fx-scanlines::after {
+  opacity: 0.085;
+  animation: nd-crt-sweep 5.5s linear infinite;
+}
+
+@keyframes nd-crt-sweep {
+  0% {
+    transform: translate3d(0, -120px, 0);
+  }
+  100% {
+    transform: translate3d(0, 100vh, 0);
+  }
+}
+
+/* ---------- glitch overlay & interactive hooks ---------- */
+.nd-fx-glitch {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+:root[data-glitch='off'] .nd-fx-glitch {
+  display: none;
+}
+
+:root[data-glitch='on'] .nd-fx-glitch::before,
+:root[data-glitch='on'] .nd-fx-glitch::after {
+  content: '';
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+:root[data-glitch='on'] .nd-fx-glitch::before {
+  top: 26%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 8%,
+    color-mix(in srgb, var(--secondary) 45%, transparent) 30%,
+    color-mix(in srgb, var(--accent) 40%, transparent) 68%,
+    transparent 92%
+  );
+  animation: nd-tear-a 11s steps(1) infinite;
+}
+
+:root[data-glitch='on'] .nd-fx-glitch::after {
+  top: 68%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 12%,
+    color-mix(in srgb, var(--accent) 42%, transparent) 44%,
+    color-mix(in srgb, var(--primary) 38%, transparent) 74%,
+    transparent 94%
+  );
+  animation: nd-tear-b 14s steps(1) infinite;
+}
+
+@keyframes nd-tear-a {
+  0%,
+  96.8%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  97.2% {
+    opacity: 0.55;
+    transform: translate3d(-14px, 4px, 0);
+  }
+  97.8% {
+    opacity: 0.4;
+    transform: translate3d(18px, -18px, 0);
+  }
+  98.4% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes nd-tear-b {
+  0%,
+  97.4%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  97.9% {
+    opacity: 0.45;
+    transform: translate3d(16px, -6px, 0);
+  }
+  98.6% {
+    opacity: 0.35;
+    transform: translate3d(-12px, 12px, 0);
+  }
+  99% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.nd-greeting__txt,
+.nd-clock__digits {
+  position: relative;
+  display: inline-block;
+}
+
+.nd-clock__digits {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+:root[data-glitch='on'] .nd-greeting {
+  text-shadow:
+    -1px 0 color-mix(in srgb, var(--accent) 45%, transparent),
+    1px 0 color-mix(in srgb, var(--secondary) 45%, transparent),
+    0 0 18px var(--glow);
+}
+
+:root[data-glitch='on'] .nd-clock {
+  text-shadow:
+    -2px 0 color-mix(in srgb, var(--accent) 32%, transparent),
+    2px 0 color-mix(in srgb, var(--secondary) 32%, transparent),
+    0 0 24px var(--glow-primary),
+    0 0 54px color-mix(in srgb, var(--glow) 45%, transparent);
+}
+
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::before,
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::after,
+:root[data-glitch='on'] .nd-clock__digits[data-text]::before,
+:root[data-glitch='on'] .nd-clock__digits[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::before,
+:root[data-glitch='on'] .nd-clock__digits[data-text]::before {
+  color: var(--secondary);
+}
+
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::after,
+:root[data-glitch='on'] .nd-clock__digits[data-text]::after {
+  color: var(--accent);
+}
+
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::before {
+  animation: nd-rgb-burst-a 9.5s steps(1) infinite;
+}
+
+:root[data-glitch='on'] .nd-greeting__txt[data-text]::after {
+  animation: nd-rgb-burst-b 9.5s steps(1) infinite;
+}
+
+:root[data-glitch='on'] .nd-greeting:hover .nd-greeting__txt[data-text]::before,
+:root[data-glitch='on'] .nd-clock:hover .nd-clock__digits[data-text]::before {
+  animation: nd-rgb-hover-a 260ms steps(2) 1;
+}
+
+:root[data-glitch='on'] .nd-greeting:hover .nd-greeting__txt[data-text]::after,
+:root[data-glitch='on'] .nd-clock:hover .nd-clock__digits[data-text]::after {
+  animation: nd-rgb-hover-b 260ms steps(2) 1;
+}
+
+@keyframes nd-rgb-burst-a {
+  0%,
+  96.5%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  97% {
+    opacity: 0.7;
+    transform: translate3d(-3px, -1px, 0);
+  }
+  97.8% {
+    opacity: 0.45;
+    transform: translate3d(2px, 1px, 0);
+  }
+  98.5% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes nd-rgb-burst-b {
+  0%,
+  96.5%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  97% {
+    opacity: 0.65;
+    transform: translate3d(3px, 1px, 0);
+  }
+  97.8% {
+    opacity: 0.4;
+    transform: translate3d(-2px, -1px, 0);
+  }
+  98.5% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes nd-rgb-hover-a {
+  0% {
+    opacity: 0.8;
+    transform: translate3d(-4px, -1px, 0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate3d(3px, 1px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes nd-rgb-hover-b {
+  0% {
+    opacity: 0.75;
+    transform: translate3d(4px, 1px, 0);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translate3d(-3px, -1px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+:root[data-glitch='on'] .nd-card:hover {
+  animation: nd-glitch-snap 220ms steps(2) 1;
+}
+
+:root[data-glitch='on'] .nd-btn:hover:not(:disabled) {
+  animation: nd-glitch-btn 200ms steps(2) 1;
+}
+
+@keyframes nd-glitch-snap {
+  0% {
+    transform: translate3d(-2px, -2px, 0);
+    opacity: 0.88;
+  }
+  50% {
+    transform: translate3d(2px, -2px, 0);
+    opacity: 0.96;
+  }
+  100% {
+    transform: translate3d(0, -2px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes nd-glitch-btn {
+  0% {
+    transform: translate3d(-2px, 0, 0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(2px, 0, 0);
+    opacity: 0.96;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+/* ---------- reduced-motion & low-power shutdown ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .nd-fx-scanlines,
+  .nd-fx-glitch {
+    display: none !important;
+  }
+
+  .nd-greeting__txt[data-text]::before,
+  .nd-greeting__txt[data-text]::after,
+  .nd-clock__digits[data-text]::before,
+  .nd-clock__digits[data-text]::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .nd-greeting,
+  .nd-clock {
+    text-shadow: 0 0 18px var(--glow) !important;
+  }
+
+  .nd-hud-rail__pip,
+  .nd-clock__sep {
+    animation: none !important;
+  }
+}
+
+:root[data-power='low'] .nd-fx-scanlines,
+:root[data-power='low'] .nd-fx-glitch {
+  display: none !important;
+}
+
+:root[data-power='low'] .nd-greeting__txt[data-text]::before,
+:root[data-power='low'] .nd-greeting__txt[data-text]::after,
+:root[data-power='low'] .nd-clock__digits[data-text]::before,
+:root[data-power='low'] .nd-clock__digits[data-text]::after {
+  display: none !important;
+  content: none !important;
+}
+
+:root[data-power='low'] .nd-greeting,
+:root[data-power='low'] .nd-clock {
+  text-shadow: 0 0 18px var(--glow) !important;
+}
+
+:root[data-power='low'] .nd-hud-rail__pip,
+:root[data-power='low'] .nd-clock__sep {
+  animation: none !important;
+}

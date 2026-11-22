@@ -14,11 +14,12 @@ Build and test tools (Vite, TypeScript, Vitest, @preact/preset-vite, @types/chro
 ## Assets
 | Asset | Source | License |
 |---|---|---|
-| UI icons (`src/components/Icon.tsx`) | Drawn for NEONDECK | Project's own |
-| Extension icons (`public/icons/*.png`) | Placeholders made for NEONDECK | Project's own |
+| UI icons (`src/components/Icon.tsx`) | Custom cyberpunk HUD SVG icon set drawn for NEONDECK | Project's own |
+| Extension icons (`public/icons/*.png`) | NEONDECK brand kit (Kurogrid) | Project's own |
+| Audio engine (`src/audio/`) | Procedural WebAudio UI SFX & rain/synthwave synthesis for NEONDECK | Project's own |
 | Quote line | Chosen by the project owner | See `docs/yayin-kontrol-listesi.md` (origin check) |
 
-No fonts, sounds, images or videos from third parties are bundled yet.
+No third-party fonts, sounds, images or videos are bundled.
 
 ## To fill in later
 Any sound loops, fonts or images added later are listed here (source URL, author, license, and which file uses it) before release. Only licenses that allow redistribution inside a free extension are acceptable (e.g. CC0, CC BY with attribution, OFL for fonts).

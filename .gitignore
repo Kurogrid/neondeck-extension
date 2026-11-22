@@ -5,3 +5,8 @@ dist/
 .env.*
 release/
 dist-firefox/
+
+# signing keys and packed extensions (never commit)
+*.pem
+*.key
+*.crx

@@ -1,5 +1,6 @@
 import type { ComponentChildren } from 'preact';
 import { useRef, useState } from 'preact/hooks';
+import { ambientEngine, audioText, playSfx, type AmbientTrack } from '../audio';
 import { readBrowserBookmarks } from '../core/bookmarks';
 import { t, type MsgKey } from '../core/i18n';
 import { permSupported, permsAvailable, type OptionalPerm } from '../core/permissions';
@@ -16,6 +17,7 @@ type Msg = { kind: 'ok' | 'err'; lines: string[] } | null;
 
 const LANG_NAMES: Record<Locale, string> = { en: 'English', tr: 'Türkçe' };
 const DISPLAY_KEYS = ['showGreeting', 'showTime', 'showDate', 'showSearch', 'showQuotes', 'showNetlinks', 'showWidgets'] as const;
+const AMBIENT_TRACKS: readonly AmbientTrack[] = ['off', 'rain', 'synthwave'];
 
 function Section({ title, children }: { title: string; children: ComponentChildren }) {
   return <section class="nd-set"><h3 class="nd-set__title">{title}</h3>{children}</section>;
@@ -124,9 +126,38 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
       </select>
     </label>
   );
-  const toggle = (label: string, checked: boolean, onChange: (v: boolean) => void) => (
-    <label class="nd-check"><input type="checkbox" checked={checked} onChange={(e) => onChange(e.currentTarget.checked)} /> {label}</label>
+  const toggle = (label: string, checked: boolean, onChange: (v: boolean) => void, extraClass = '') => (
+    <label class={`nd-check${extraClass ? ` ${extraClass}` : ''}`}><input type="checkbox" checked={checked} onChange={(e) => onChange(e.currentTarget.checked)} /> {label}</label>
   );
+
+  const onRadioKey = <K extends string>(options: readonly K[], index: number, onChange: (v: K) => void, e: KeyboardEvent) => {
+    const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    const nextIdx = (index + step + options.length) % options.length;
+    const nextVal = options[nextIdx];
+    if (nextVal !== undefined) onChange(nextVal);
+    const parent = (e.currentTarget as HTMLElement).parentElement;
+    const btn = parent?.querySelectorAll<HTMLButtonElement>('[role="radio"]')[nextIdx];
+    btn?.focus();
+  };
+
+  const segmented = <K extends string>(label: MsgKey, value: K, options: readonly K[], optLabel: (o: K) => string, onChange: (v: K) => void) => {
+    const labelId = `nd-lbl-${label}`;
+    return (
+      <div class="nd-field">
+        <span id={labelId}>{t(L, label)}</span>
+        <div class="nd-seg" role="radiogroup" aria-labelledby={labelId}>
+          {options.map((o, i) => (
+            <button key={o} type="button" role="radio" aria-checked={value === o} class="nd-seg__btn"
+              onClick={() => onChange(o)} onKeyDown={(e) => onRadioKey(options, i, onChange, e)}>
+              {optLabel(o)}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Modal title={t(L, 'settings')} closeLabel={t(L, 'close')} onClose={onClose} variant="drawer-left">
@@ -137,11 +168,96 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
       </Section>
 
       <Section title={t(L, 'secAppearance')}>
-        {select('theme', s.theme.id, THEME_IDS, (o) => t(L, `theme_${o}`), (v) => update((d) => { d.theme.id = v; }))}
-        {select('scanlines', s.theme.scanlines, SCANLINE_MODES, (o) => t(L, `scan_${o}`), (v) => update((d) => { d.theme.scanlines = v; }))}
-        {select('chamfer', s.theme.chamfer, CHAMFER_SIZES, (o) => t(L, `chamfer_${o}`), (v) => update((d) => { d.theme.chamfer = v; }))}
-        {toggle(t(L, 'glitch'), s.theme.glitch, (v) => update((d) => { d.theme.glitch = v; }))}
-        {toggle(t(L, 'lowPower'), s.theme.lowPower, (v) => update((d) => { d.theme.lowPower = v; }))}
+        <div class="nd-field">
+          <span id="nd-lbl-theme">{t(L, 'theme')}</span>
+          <div class="nd-theme-grid" role="radiogroup" aria-labelledby="nd-lbl-theme">
+            {THEME_IDS.map((o, i) => (
+              <button key={o} type="button" role="radio" aria-checked={s.theme.id === o} class="nd-theme-card nd-chamfer" data-theme-card={o}
+                onClick={() => update((d) => { d.theme.id = o; })}
+                onKeyDown={(e) => onRadioKey(THEME_IDS, i, (v) => update((d) => { d.theme.id = v; }), e)}>
+                <span class="nd-theme-card__top">
+                  <span class="nd-theme-card__swatches" aria-hidden="true">
+                    <span class="nd-swatch nd-swatch--pri" />
+                    <span class="nd-swatch nd-swatch--sec" />
+                    <span class="nd-swatch nd-swatch--acc" />
+                  </span>
+                  <span class="nd-theme-card__pip" aria-hidden="true" />
+                </span>
+                <span class="nd-theme-card__name">{t(L, `theme_${o}`)}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        {segmented('scanlines', s.theme.scanlines, SCANLINE_MODES, (o) => t(L, `scan_${o}`), (v) => update((d) => { d.theme.scanlines = v; }))}
+        {segmented('chamfer', s.theme.chamfer, CHAMFER_SIZES, (o) => t(L, `chamfer_${o}`), (v) => update((d) => { d.theme.chamfer = v; }))}
+        {toggle(t(L, 'glitch'), s.theme.glitch, (v) => update((d) => { d.theme.glitch = v; }), 'nd-check--switch')}
+        {toggle(t(L, 'lowPower'), s.theme.lowPower, (v) => update((d) => { d.theme.lowPower = v; }), 'nd-check--switch')}
+      </Section>
+
+      <Section title={audioText(L, 'secAudio')}>
+        {toggle(
+          audioText(L, 'uiSfx'),
+          s.audio.uiSfx,
+          (v) => {
+            update((d) => { d.audio.uiSfx = v; });
+            if (v) playSfx('toggle', true, s.audio.volume);
+          },
+          'nd-check--switch',
+        )}
+        <label class="nd-field">
+          <span class="nd-row"><span>{audioText(L, 'sfxVolume')}</span><span class="nd-amb__pct">{Math.round(s.audio.volume * 100)}%</span></span>
+          <input
+            type="range"
+            class="nd-range"
+            min={0}
+            max={100}
+            value={Math.round(s.audio.volume * 100)}
+            onInput={(e) => {
+              const v = Math.max(0, Math.min(1, Number(e.currentTarget.value) / 100));
+              update((d) => { d.audio.volume = v; });
+            }}
+          />
+        </label>
+        <div class="nd-field">
+          <span id="nd-lbl-amb-track">{audioText(L, 'ambientTrack')}</span>
+          <div class="nd-seg nd-seg--3" role="radiogroup" aria-labelledby="nd-lbl-amb-track">
+            {AMBIENT_TRACKS.map((tr, i) => {
+              const pickTrack = (next: AmbientTrack) => {
+                update((d) => { d.audio.ambient.track = next; });
+                if (next === 'off') ambientEngine.stop();
+                else ambientEngine.start(next, s.audio.ambient.volume);
+              };
+              return (
+                <button
+                  key={tr}
+                  type="button"
+                  role="radio"
+                  aria-checked={s.audio.ambient.track === tr}
+                  class="nd-seg__btn"
+                  onClick={() => pickTrack(tr)}
+                  onKeyDown={(e) => onRadioKey(AMBIENT_TRACKS, i, pickTrack, e)}
+                >
+                  {audioText(L, `track_${tr}`)}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <label class="nd-field">
+          <span class="nd-row"><span>{audioText(L, 'ambVolume')}</span><span class="nd-amb__pct">{Math.round(s.audio.ambient.volume * 100)}%</span></span>
+          <input
+            type="range"
+            class="nd-range"
+            min={0}
+            max={100}
+            value={Math.round(s.audio.ambient.volume * 100)}
+            onInput={(e) => {
+              const v = Math.max(0, Math.min(1, Number(e.currentTarget.value) / 100));
+              update((d) => { d.audio.ambient.volume = v; });
+              ambientEngine.setVolume(v);
+            }}
+          />
+        </label>
       </Section>
 
       <Section title={t(L, 'secDisplay')}>

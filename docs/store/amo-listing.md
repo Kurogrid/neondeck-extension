@@ -1,28 +1,46 @@
-# Firefox Add-ons (addons.mozilla.org) submission: NEONDECK 0.1.0 alpha
+# Firefox Add-ons (addons.mozilla.org): NEONDECK 0.2.0
 
-> Prepared 2026-11-12. Copy each block into the matching field of the AMO Developer Hub.
+> Prepared 2026-11-22. 0.1.0 has been live since 2026-11-15 (https://addons.mozilla.org/firefox/addon/neondeck/). For 0.2.0 use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
 
-## Files to upload
-- **Add-on file**: `release/neondeck-0.1.0-firefox.zip`
-- **Source code** (asked because the code is bundled/minified by Vite): `release/neondeck-0.1.0-source.zip`
+## Files to upload (Upload New Version)
+- **Add-on file**: `release/neondeck-0.2.0-firefox.zip`
+- **Source code** (Vite bundles/minifies the code): `release/neondeck-0.2.0-source.zip`
 - Both come from `npm run package` on a clean, committed tree.
+- Compatibility: Firefox (desktop) only.
+
+## Screenshots (Edit Product Page → Images)
+`docs/store/screenshots/` (all 1280x800), in this order:
+1. `01-edgerunners.png`: Edgerunners theme with weather and Pomodoro
+2. `02-arasaka.png`: Arasaka theme
+3. `03-ghost.png`: Ghost theme
+4. `04-orchid.png`: Acid Orchid theme
+5. `05-widgets.png`: widget panel (tasks and habits, ambient sound, AI quick access)
+
+Suggested captions:
+1. Edgerunners: neon rain city, live weather and a Pomodoro dial
+2. Arasaka: red corporate HUD with a live radar background
+3. Ghost: signal rain and circuit traces
+4. Acid Orchid: synth horizon and neon grid
+5. Widgets you arrange by drag and drop: tasks, habits, ambient sound, AI links
 
 ## Distribution
-- **On this site** (listed on addons.mozilla.org).
-- Tick **"This add-on is experimental"**: marks 0.1.0 as alpha on the listing page.
-- Platform: Firefox (desktop). Android is not declared (`gecko_android` absent).
-
-## Name
-NEONDECK
-
-## Add-on URL (slug)
-neondeck
+- Keep **"This add-on is experimental"** ticked (still alpha).
 
 ## Summary (max 250 characters)
-Alpha. A cyberpunk HUD new tab: big clock, multi-engine search, netlinks with categories and 1–9 shortcuts, and side-panel widgets (weather, world clock, notes, tasks & habits, Pomodoro, AI links). Private by design: no account, no tracking.
+Alpha. A cyberpunk HUD new tab with four animated themes (Edgerunners, Arasaka, Ghost, Acid Orchid), CRT and glitch effects, multi-engine search, netlinks and a widget panel: weather, Pomodoro, tasks, ambient sound. No account, no tracking.
+
+_(240 characters)_
 
 ## Description
-NEONDECK turns every new tab into a neon command deck. This is an early alpha: the core works, the full visual identity (animated backgrounds, CRT and glitch effects, final icon set, ambient sound) is still being built.
+NEONDECK turns every new tab into a neon command deck. Still an alpha, but the full look is here: four themes, each with its own animated background, HUD frames and optional CRT and glitch effects.
+
+THEMES
+• Edgerunners: neon rain city at night
+• Arasaka: red corporate HUD with a sweeping radar
+• Ghost: green signal rain and circuit traces
+• Acid Orchid: purple synth horizon over a neon grid
+• Scanlines, glitch, vignette and corner-cut panels you can tune or turn off
+• Low power mode and reduced-motion support: animations stop completely
 
 COMMAND DECK
 • Greeting, big clock and date (12/24-hour)
@@ -30,7 +48,7 @@ COMMAND DECK
 • Press / to search, 1–9 to open your top links
 
 NETLINKS
-• Your favourite sites as cards in collapsible categories
+• Your favourite sites as cards in collapsible categories, with 40+ HUD icons
 • Import your Firefox bookmarks in one click (optional permission)
 
 WIDGETS (side panel, drag to reorder)
@@ -38,44 +56,29 @@ WIDGETS (side panel, drag to reorder)
 • World clock with any time zone
 • Scratchpad with multiple notes
 • Tasks and daily habits with streaks
-• Pomodoro timer that keeps going after you close the tab
+• Pomodoro with a neon dial; keeps going after you close the tab
+• Ambient sound: night rain or synth pad, generated in your browser, never autoplays
 • AI quick access: Claude, Gemini, ChatGPT or your own links
-
-LOOK
-• Four themes: Neon Pulse, Red Protocol, Phantom Signal, Acid Orchid
 
 PRIVATE BY DESIGN
 • Installs with storage permission only
 • Settings stay on your device; export/import as JSON
-• No remote code, strict content security policy
+• No remote code, no sound or font downloads, strict content security policy
 
-English and Turkish interface. NEONDECK is an independent project, not affiliated with any game, film or brand.
+English and Turkish interface. Open source (MIT): https://github.com/Kurogrid/neondeck-extension
 
-## Categories
-Firefox: **Tabs**, **Appearance** (pick what the form offers; max 2–3).
+NEONDECK is an independent fan-made project. It is not affiliated with, endorsed by or sponsored by CD PROJEKT, Netflix or any other rights holder; theme names refer to the moods they evoke.
 
-## Tags
-new tab, dashboard, productivity, cyberpunk, widgets
+## Release notes (version 0.2.0)
+The visual update. Four themes now have their own animated canvas backgrounds (neon rain city, red radar HUD, signal rain, synth grid), HUD frames, CRT scanlines, glitch and vignette effects. New settings drawer with theme cards and toggles, 40+ new netlink icons, a Pomodoro dial, and an ambient sound widget (rain / synth pad, synthesized locally, never autoplays) plus optional UI sounds. Theme ids are migrated automatically; your settings are kept.
 
-## Support email
-kurogrid.dev@gmail.com
-
-## Homepage
-https://kurogrid.github.io/
-
-## License
-All Rights Reserved (default) unless the owner chooses an open-source license.
-
-## Privacy policy (AMO has a text field)
-Paste the text of `docs/store/privacy-policy.md` (also online at https://kurogrid.github.io/neondeck/privacy).
-
-## Release notes (version 0.1.0)
-First public alpha. Command deck (clock, search, quote), netlinks with categories and keyboard shortcuts, settings with JSON backup/import, four colour themes, widget panel with weather, world clock, scratchpad, tasks & habits, Pomodoro and AI links. Visual effects, animated backgrounds and sound come in later versions.
-
-## Notes for reviewers
-- Build: see BUILD.md in the source zip. `npm ci && npm run build:firefox` produces `dist-firefox/`, identical to the uploaded package. Built on Windows 11 with Node 24.20.0 / npm 11.19.0; only public npm packages.
+## Notes for reviewers (0.2.0)
+- Build: see BUILD.md in the source zip. `npm ci && npm run build:firefox` produces `dist-firefox/`, identical to the uploaded package (verified locally). Built on Windows 11 with Node 24.20.0 / npm 11.19.0; only public npm packages.
 - Bundler: Vite (open source). Runtime library: Preact (MIT, https://github.com/preactjs/preact), bundled from npm.
 - The linter warning `UNSAFE_VAR_ASSIGNMENT` (innerHTML) comes from Preact's internal `dangerouslySetInnerHTML` support. NEONDECK's own code never uses innerHTML or `dangerouslySetInnerHTML`.
-- Network: only `api.open-meteo.com` and `geocoding-api.open-meteo.com` (weather), restricted by CSP `connect-src`. Requests are made only after the user opts in to the optional `locationInfo` data collection permission (built-in consent, `strict_min_version` 140).
-- Permissions: `storage`; optional `bookmarks`, requested only from the "Import bookmarks" button.
-- No remote code, no content scripts, no background script.
+- New in 0.2.0: 2D canvas backgrounds (`src/scenes/`), paused when the tab is hidden and static in low-power / reduced-motion mode; WebAudio sounds (`src/audio/`) synthesized procedurally, no audio files, started only from a user click.
+- Network: unchanged. Only `api.open-meteo.com` and `geocoding-api.open-meteo.com` (weather), restricted by CSP `connect-src`, and only after the user opts in to the optional `locationInfo` data collection permission.
+- Permissions: unchanged. `storage`; optional `bookmarks`, requested only from the "Import bookmarks" button. No remote code, no content scripts, no background script.
+
+## Unchanged fields
+Name `NEONDECK`, slug `neondeck`, categories Tabs + Appearance, support email kurogrid.dev@gmail.com, homepage https://kurogrid.github.io/, license MIT, privacy policy (text of `docs/store/privacy-policy.md`, online at https://kurogrid.github.io/neondeck/privacy).

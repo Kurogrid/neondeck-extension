@@ -41,7 +41,7 @@ NEONDECK replaces Chrome's new tab page with a fast, private dashboard styled li
 • AI quick access: Claude, Gemini, ChatGPT or your own links
 
 **LOOK & FEEL**
-• Four themes: Neon Pulse, Red Protocol, Phantom Signal, Acid Orchid
+• Four themes: Edgerunners, Arasaka, Ghost, Acid Orchid, each with its own animated background
 • Corner-cut panels, scanlines and glitch accents, low-power mode and reduced-motion support **(after Faz 2: confirm effects)**
 • Live animated backgrounds **(after Faz 2)**
 

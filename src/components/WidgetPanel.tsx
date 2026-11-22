@@ -4,6 +4,7 @@ import { t } from '../core/i18n';
 import type { Settings, WidgetState, WidgetType } from '../core/schema';
 import type { Update } from '../state';
 import { AiLinksView } from '../widgets/ailinks/View';
+import { AmbientView } from '../widgets/ambient/View';
 import { cleanWidgetConfig, type WidgetConfigs } from '../widgets/configs';
 import { moveWidget, moveWidgetBy } from '../widgets/order';
 import { PomodoroView } from '../widgets/pomodoro/View';
@@ -14,11 +15,11 @@ import { WeatherView } from '../widgets/weather/View';
 import { WorldClockView } from '../widgets/worldclock/View';
 import { Icon } from './Icon';
 
-const AmbientView = ({ L }: WidgetProps<'ambient'>) => <p class="nd-hint">{t(L, 'ambientSoon')}</p>;
+const AmbientStub = () => null;
 
 const VIEWS: { [K in WidgetType]: ComponentType<WidgetProps<K>> } = {
   weather: WeatherView, worldclock: WorldClockView, scratchpad: ScratchpadView, tasks: TasksView,
-  pomodoro: PomodoroView, ambient: AmbientView, ailinks: AiLinksView,
+  pomodoro: PomodoroView, ambient: AmbientStub, ailinks: AiLinksView,
 };
 const ICONS: Record<WidgetType, string> = { weather: 'cloud', worldclock: 'clock', scratchpad: 'note', tasks: 'list', pomodoro: 'reset', ambient: 'sound', ailinks: 'chip' };
 
@@ -80,7 +81,9 @@ function WidgetCard<T extends WidgetType>({ s, w, update, editing, dnd }: { s: S
           </span>
         )}
       </h3>
-      <View L={L} s={s} config={config} setConfig={setConfig} editing={editing} />
+      {w.type === 'ambient'
+        ? <AmbientView L={L} s={s} update={update} />
+        : <View L={L} s={s} config={config} setConfig={setConfig} editing={editing} />}
     </section>
   );
 }
