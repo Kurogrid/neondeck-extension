@@ -4,7 +4,7 @@
 
 A cyberpunk HUD new tab dashboard for Firefox and Chrome: big clock, multi-engine search, netlinks with keyboard shortcuts, and a side panel of focus widgets. Private by design: no account, no tracking, no remote code.
 
-> **Status: 0.3.0 alpha.** Five themes with live wallpapers and animated canvas backgrounds, HUD frames, CRT and glitch effects, theme music, a local music player, an optional Spotify radio and a full widget panel. Still marked experimental while it matures.
+> **Status: 1.0.0 stable.** Five themes with live wallpapers and animated canvas backgrounds, HUD frames, CRT and glitch effects, theme music, a local music player, an optional Spotify radio and a full widget panel.
 
 _Türkçe özet aşağıda._
 
@@ -18,7 +18,7 @@ _Türkçe özet aşağıda._
 - **Languages**: English, Turkish.
 
 ## Install
-- **Firefox**: [NEONDECK on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/neondeck/) (alpha, marked experimental).
+- **Firefox**: [NEONDECK on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/neondeck/).
 - **From source**: build it (below), then
   - Firefox: `about:debugging` → This Firefox → Load Temporary Add-on → `dist-firefox/manifest.json`
   - Chrome: `chrome://extensions` → Developer mode → Load unpacked → `dist/`
@@ -53,4 +53,4 @@ NEONDECK is an independent project and is not affiliated with any game, film or 
 ---
 
 ## Türkçe özet
-NEONDECK, Firefox ve Chrome için cyberpunk HUD tarzı bir yeni sekme panosudur: büyük saat, çoklu arama motoru, kısayollu netlink'ler ve yan panelde odak widget'ları (hava durumu, dünya saati, not defteri, görev ve alışkanlıklar, Pomodoro, AI bağlantıları). Hesap yok, izleme yok; veriler tarayıcında kalır. Şu an **0.3.0 alfa** sürümündedir: beş temanın her biri kendi canlı duvar kağıtları ya da hareketli arka planıyla geliyor; CRT ve glitch efektleri, tema müzikleri, yerel müzik çalar, opsiyonel Spotify radyosu ve widget paneli hazır. Derleme adımları yukarıda, lisans MIT.
+NEONDECK, Firefox ve Chrome için cyberpunk HUD tarzı bir yeni sekme panosudur: büyük saat, çoklu arama motoru, kısayollu netlink'ler ve yan panelde odak widget'ları (hava durumu, dünya saati, not defteri, görev ve alışkanlıklar, Pomodoro, AI bağlantıları). Hesap yok, izleme yok; veriler tarayıcında kalır. Şu an **1.0.0** kararlı sürümündedir: beş temanın her biri kendi canlı duvar kağıtları ya da hareketli arka planıyla geliyor; CRT ve glitch efektleri, tema müzikleri, yerel müzik çalar, opsiyonel Spotify radyosu ve widget paneli hazır. Derleme adımları yukarıda, lisans MIT.
