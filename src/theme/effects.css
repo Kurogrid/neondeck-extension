@@ -12,9 +12,9 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse 78% 72% at 50% 46%,
-    transparent 38%,
-    color-mix(in srgb, var(--bg) 52%, transparent) 78%,
-    color-mix(in srgb, var(--bg) 88%, #000) 100%
+    transparent 55%,
+    color-mix(in srgb, var(--bg) 22%, transparent) 86%,
+    color-mix(in srgb, var(--bg) 58%, #000) 100%
   );
   transition: opacity 0.25s ease;
 }
@@ -57,7 +57,7 @@
   background: repeating-linear-gradient(
     to bottom,
     transparent 0 2px,
-    rgba(0, 0, 0, 0.14) 2px 3px
+    rgba(0, 0, 0, 0.02) 2px 3px
   );
 }
 
@@ -69,12 +69,12 @@
   background: repeating-linear-gradient(
     to bottom,
     transparent 0 2px,
-    rgba(0, 0, 0, 0.24) 2px 3px
+    rgba(0, 0, 0, 0.03) 2px 3px
   );
 }
 
 :root[data-scanlines='default'] .nd-fx-scanlines::after {
-  opacity: 0.05;
+  opacity: 0.015;
   animation: nd-crt-sweep 8.5s linear infinite;
 }
 

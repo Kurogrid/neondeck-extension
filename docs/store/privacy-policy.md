@@ -1,6 +1,6 @@
 # NEONDECK Privacy Policy
 
-_Last updated: 2026-11-12 (Firefox)_
+_Last updated: 2026-11-23_
 
 NEONDECK is a browser extension for Firefox and Chrome that replaces the new tab page with a dashboard. This policy explains what happens to your data. In short: **NEONDECK has no servers, no accounts, no analytics and no ads. Your data stays in your browser.**
 
@@ -17,11 +17,15 @@ This data is not synced to other devices and is never sent to the developer. Uni
 
 ## Network requests
 
-NEONDECK itself contacts only one service, and only if you turn on the **Weather** widget and choose a city:
+Apart from the optional Spotify radio described below, NEONDECK itself contacts only one service, and only if you turn on the **Weather** widget and choose a city:
 
 - **Open-Meteo** (`api.open-meteo.com`, `geocoding-api.open-meteo.com`) receives the city name you type when searching for a location, and the chosen location's coordinates rounded to two decimals (about 1 km). Requests are sent without cookies and without a referrer. See Open-Meteo's terms and privacy information at https://open-meteo.com/.
 
 In Firefox, this is declared as optional *location* data: Firefox asks for your consent before the first weather request, and you can withdraw it at any time in the add-on's permissions. Without consent the widget sends nothing.
+
+### Radio (optional, Spotify)
+
+The radio is off until you open it. When you open the radio panel (in Settings or in the Ambient sound widget), NEONDECK shows Spotify's official embedded player, loaded from `open.spotify.com`. From that moment your browser talks to Spotify directly: Spotify receives the usual connection data (such as your IP address and browser details), may set its own cookies, and applies its own privacy policy (https://www.spotify.com/legal/privacy-policy/). If you are signed in to Spotify, it may know what you play. NEONDECK does not send Spotify anything else and does not receive any data back from it. The radio settings (chosen station, last track) stay on your device. Music you add to the local player is stored only in your browser (IndexedDB) and never uploaded.
 
 No other request is made by the extension. When you search or open a link, your browser simply navigates to that website (for example your chosen search engine); what that website does is covered by its own privacy policy.
 
@@ -43,7 +47,7 @@ You can revoke them at any time in **Settings → Permissions** or on the browse
 - no user accounts or sign-in
 - no analytics, telemetry, tracking or advertising
 - no sale or sharing of data with anyone
-- no remote code: everything the extension runs is included in the package
+- no remote code: everything the extension runs is included in the package (the optional Spotify player runs in its own isolated frame)
 
 ## Children
 

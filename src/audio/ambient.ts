@@ -1,6 +1,8 @@
+import type { AmbientTrack } from '../core/schema';
 import { ensureAudioContext } from './context';
+import { startThemeTrack } from './themes';
 
-export type AmbientTrack = 'off' | 'rain' | 'synthwave';
+export type { AmbientTrack };
 
 export interface AmbientRuntimeState {
   playing: boolean;
@@ -247,9 +249,15 @@ class AmbientEngine {
   private nextId = 1;
   private state: AmbientRuntimeState = { playing: false, track: 'off' };
   private listeners = new Set<() => void>();
+  private beforeStartHooks = new Set<() => void>();
 
   private notify(): void {
     for (const fn of this.listeners) fn();
+  }
+
+  onBeforeStart(fn: () => void): () => void {
+    this.beforeStartHooks.add(fn);
+    return () => this.beforeStartHooks.delete(fn);
   }
 
   private tearDownSession(s: Session, fadeSec: number): void {
@@ -266,6 +274,7 @@ class AmbientEngine {
   }
 
   start(track: Exclude<AmbientTrack, 'off'>, volume: number): boolean {
+    for (const hook of this.beforeStartHooks) hook();
     const ctx = ensureAudioContext();
     if (!ctx) return false;
 
@@ -280,7 +289,12 @@ class AmbientEngine {
     master.gain.linearRampToValueAtTime(targetGain(volume), t + 0.4);
     master.connect(ctx.destination);
 
-    const cleanup = track === 'rain' ? startRain(ctx, master) : startSynthwave(ctx, master);
+    const cleanup =
+      track === 'rain'
+        ? startRain(ctx, master)
+        : track === 'synthwave'
+          ? startSynthwave(ctx, master)
+          : startThemeTrack(track, ctx, master);
     this.session = { id: this.nextId++, ctx, master, cleanup };
     this.state = { playing: true, track };
     this.notify();

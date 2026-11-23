@@ -103,10 +103,15 @@ button, input, select { font: inherit; color: inherit; }
 /* ---------- dialogs & drawer ---------- */
 .nd-overlay { position: fixed; inset: 0; z-index: 50; display: flex; background: color-mix(in srgb, var(--bg) 70%, transparent); }
 .nd-overlay--center { align-items: center; justify-content: center; padding: 16px; }
+.nd-overlay--drawer-right { justify-content: flex-end; }
+.nd-overlay--hidden { visibility: hidden; opacity: 0; pointer-events: none; background: transparent; }
 .nd-dialog { display: flex; flex-direction: column; max-height: 100%; background: var(--surface); border: 1px solid var(--primary); color: var(--text); }
 .nd-dialog--center { width: min(520px, 100%); }
 .nd-dialog--drawer-left { width: min(420px, 100%); height: 100%; clip-path: none; border-width: 0 1px 0 0; animation: nd-slide-in 0.18s ease-out; }
+.nd-dialog--drawer-right { width: min(440px, 100%); height: 100%; clip-path: none; border-width: 0 0 0 1px; animation: nd-slide-in-right 0.18s ease-out; }
+.nd-overlay--hidden .nd-dialog--drawer-right { transform: translateX(100%); }
 @keyframes nd-slide-in { from { transform: translateX(-24px); opacity: 0; } }
+@keyframes nd-slide-in-right { from { transform: translateX(24px); opacity: 0; } }
 .nd-dialog__head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid color-mix(in srgb, var(--primary) 35%, transparent); }
 .nd-dialog__title { margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.14em; color: var(--primary); }
 .nd-dialog__body { overflow-y: auto; padding: 16px 20px 24px; display: grid; gap: 22px; }

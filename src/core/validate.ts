@@ -1,5 +1,5 @@
 import {
-  CHAMFER_SIZES, LOCALES, SCANLINE_MODES, THEME_IDS, WIDGET_TYPES, defaultSettings,
+  AMBIENT_TRACKS, CHAMFER_SIZES, LOCALES, SCANLINE_MODES, THEME_IDS, WIDGET_TYPES, defaultSettings,
   type Netlink, type SearchEngine, type Settings, type WidgetState,
 } from './schema';
 import { bool, isObj, num, oneOf, safeUrl, slug, str } from './guards';
@@ -122,7 +122,7 @@ export function sanitizeSettings(input: unknown): Settings {
   const ambient = isObj(audio.ambient) ? audio.ambient : {};
   s.audio = {
     uiSfx: bool(audio.uiSfx, false), volume: num(audio.volume, 0, 1, d.audio.volume),
-    ambient: { track: oneOf(ambient.track, ['off', 'rain', 'synthwave'] as const, 'off'), volume: num(ambient.volume, 0, 1, d.audio.ambient.volume) },
+    ambient: { track: oneOf(ambient.track, AMBIENT_TRACKS, 'off'), volume: num(ambient.volume, 0, 1, d.audio.ambient.volume) },
   };
 
   const search = g('search');

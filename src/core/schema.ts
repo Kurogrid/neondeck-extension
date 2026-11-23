@@ -2,7 +2,7 @@ import { cleanWidgetConfig } from '../widgets/configs';
 
 export const SCHEMA_VERSION = 7;
 
-export const THEME_IDS = ['edgerunners', 'arasaka', 'ghost', 'orchid'] as const;
+export const THEME_IDS = ['edgerunners', 'arasaka', 'ghost', 'orchid', 'samurai'] as const;
 export type ThemeId = (typeof THEME_IDS)[number];
 export const LOCALES = ['en', 'tr'] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -11,6 +11,8 @@ export const CHAMFER_SIZES = ['off', 'sm', 'md', 'lg'] as const;
 export const WIDGET_TYPES = ['weather', 'worldclock', 'scratchpad', 'tasks', 'pomodoro', 'ambient', 'ailinks'] as const;
 export type WidgetType = (typeof WIDGET_TYPES)[number];
 export const DEFAULT_CATEGORIES = ['daily', 'work', 'entertainment', 'social', 'other'] as const;
+export const AMBIENT_TRACKS = ['off', 'rain', 'synthwave', 'edgerunners', 'arasaka', 'samurai', 'ghost', 'orchid'] as const;
+export type AmbientTrack = (typeof AMBIENT_TRACKS)[number];
 
 export interface Netlink {
   id: string;
@@ -29,7 +31,7 @@ export interface Settings {
   display: { timeFormat: '12h' | '24h'; showGreeting: boolean; showTime: boolean; showDate: boolean; showSearch: boolean; showQuotes: boolean; showNetlinks: boolean; showWidgets: boolean };
   theme: { id: ThemeId; scanlines: (typeof SCANLINE_MODES)[number]; glitch: boolean; chamfer: (typeof CHAMFER_SIZES)[number]; font: string; lowPower: boolean };
   background: { kind: 'scene' | 'image' | 'video'; sceneId?: string; mediaId?: string; brightness: number; vignette: boolean };
-  audio: { uiSfx: boolean; volume: number; ambient: { track: 'off' | 'rain' | 'synthwave'; volume: number } };
+  audio: { uiSfx: boolean; volume: number; ambient: { track: AmbientTrack; volume: number } };
   search: { engines: SearchEngine[]; active: string };
   netlinks: { items: Netlink[]; categoryOrder: string[]; collapsed: string[] };
   widgets: WidgetState[];

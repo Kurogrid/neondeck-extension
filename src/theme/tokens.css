@@ -107,6 +107,29 @@
   --grid-line: rgba(134, 255, 59, 0.08);
 }
 
+[data-theme='samurai'] {
+  --bg: #080305;
+  --bg-elevated: #12070a;
+  --surface: #15080c;
+  --surface-2: #200d12;
+  --primary: #ff2438;
+  --secondary: #00e5ff;
+  --accent: #ff6e1a;
+  --accent-2: #ff9f1c;
+  --text: #f8eff2;
+  --muted: #b08892;
+  --danger: #ff3855;
+  --glow: rgba(255, 36, 56, 0.36);
+  --glow-primary: rgba(255, 36, 56, 0.4);
+  --glow-accent: rgba(0, 229, 255, 0.32);
+  --surface-alpha: rgba(18, 7, 10, 0.8);
+  --surface-strong: rgba(13, 5, 7, 0.94);
+  --border-subtle: rgba(255, 36, 56, 0.3);
+  --border-mid: rgba(255, 36, 56, 0.62);
+  --border-hot: rgba(0, 229, 255, 0.85);
+  --grid-line: rgba(255, 36, 56, 0.09);
+}
+
 html,
 body {
   margin: 0;

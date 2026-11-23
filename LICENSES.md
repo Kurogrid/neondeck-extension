@@ -16,7 +16,8 @@ Build and test tools (Vite, TypeScript, Vitest, @preact/preset-vite, @types/chro
 |---|---|---|
 | UI icons (`src/components/Icon.tsx`) | Custom cyberpunk HUD SVG icon set drawn for NEONDECK | Project's own |
 | Extension icons (`public/icons/*.png`) | NEONDECK brand kit (Kurogrid) | Project's own |
-| Audio engine (`src/audio/`) | Procedural WebAudio UI SFX & rain/synthwave synthesis for NEONDECK | Project's own |
+| Audio engine (`src/audio/`) | Procedural WebAudio UI SFX, rain/synthwave + 5 theme tracks (`src/audio/themes.ts`) & local IndexedDB player | Project's own |
+| Wallpapers (`public/wallpapers/*.webp`) | 13 original cyberpunk scenes crafted for NEONDECK (Edgerunners, Ghost, Acid Orchid, Samurai; Arasaka uses an animated canvas scene) | Project's own |
 | Quote line | Chosen by the project owner | See `docs/yayin-kontrol-listesi.md` (origin check) |
 
 No third-party fonts, sounds, images or videos are bundled.

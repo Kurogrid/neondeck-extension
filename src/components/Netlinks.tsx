@@ -49,6 +49,15 @@ export function Netlinks({ s, update, groups, shortcuts }: Props) {
             </button>
           )}
           <button type="button" class="nd-icon-btn" onClick={() => setEditor({})} aria-label={t(L, 'addLink')} title={t(L, 'addLink')}><Icon name="plus" /></button>
+          <button
+            type="button"
+            class="nd-icon-btn"
+            onClick={() => update((d) => { d.display.showNetlinks = false; })}
+            aria-label={t(L, 'hideNetlinks')}
+            title={t(L, 'hideNetlinks')}
+          >
+            <Icon name="close" />
+          </button>
         </div>
       </div>
 

@@ -18,6 +18,7 @@ const SCENE_ALIASES: Record<string, SceneId> = {
   orchid: 'orchid',
   'acid-grid': 'orchid',
   'synth-grid': 'orchid',
+  samurai: 'samurai',
 };
 
 export function resolveSceneId(themeId: ThemeId, sceneId?: string): SceneId {
@@ -31,6 +32,7 @@ export function resolveSceneId(themeId: ThemeId, sceneId?: string): SceneId {
 export function createScene(id: SceneId, w: number, h: number): SceneRenderer {
   switch (id) {
     case 'arasaka':
+    case 'samurai':
       return createArasakaScene(w, h);
     case 'ghost':
       return createGhostScene(w, h);

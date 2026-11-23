@@ -1,23 +1,24 @@
 import type { ComponentChildren } from 'preact';
-import { useRef, useState } from 'preact/hooks';
-import { ambientEngine, audioText, playSfx, type AmbientTrack } from '../audio';
+import { useEffect, useRef, useState } from 'preact/hooks';
+import { AMBIENT_TRACKS, RADIO_STATIONS, ambientEngine, audioText, localPlayer, playSfx, radioPlayer, type AmbientTrack } from '../audio';
 import { readBrowserBookmarks } from '../core/bookmarks';
 import { t, type MsgKey } from '../core/i18n';
 import { permSupported, permsAvailable, type OptionalPerm } from '../core/permissions';
-import { CHAMFER_SIZES, LOCALES, SCANLINE_MODES, THEME_IDS, defaultSettings, type Locale, type Settings } from '../core/schema';
+import { CHAMFER_SIZES, LOCALES, SCANLINE_MODES, THEME_IDS, defaultSettings, type Locale, type Settings, type ThemeId } from '../core/schema';
 import { ImportError, MAX_IMPORT_BYTES, exportFileName, exportJson, importJson } from '../core/transfer';
 import { safeEngineUrl, slug } from '../core/validate';
 import { usePermission } from '../hooks';
+import { defaultWallpaperForTheme, resolveWallpaper, wallpaperLabel, wallpapersForTheme } from '../scenes/catalog';
+import { CUSTOM_ACCEPT_MIME, MAX_CUSTOM_BYTES, deleteCustomWallpaper, listCustomWallpapers, saveCustomWallpaper, type CustomWallpaper } from '../scenes/mediaDb';
 import type { Update } from '../state';
 import { Icon } from './Icon';
 import { Modal } from './Modal';
 
-interface Props { s: Settings; update: Update; replace: (s: Settings) => void; onClose: () => void }
+interface Props { s: Settings; update: Update; replace: (s: Settings) => void; onClose: () => void; onOpenRadio?: () => void }
 type Msg = { kind: 'ok' | 'err'; lines: string[] } | null;
 
 const LANG_NAMES: Record<Locale, string> = { en: 'English', tr: 'Türkçe' };
 const DISPLAY_KEYS = ['showGreeting', 'showTime', 'showDate', 'showSearch', 'showQuotes', 'showNetlinks', 'showWidgets'] as const;
-const AMBIENT_TRACKS: readonly AmbientTrack[] = ['off', 'rain', 'synthwave'];
 
 function Section({ title, children }: { title: string; children: ComponentChildren }) {
   return <section class="nd-set"><h3 class="nd-set__title">{title}</h3>{children}</section>;
@@ -45,15 +46,100 @@ function PermissionRow({ L, perm, extra }: { L: Locale; perm: OptionalPerm; extr
   );
 }
 
-export function SettingsDrawer({ s, update, replace, onClose }: Props) {
+export function SettingsDrawer({ s, update, replace, onClose, onOpenRadio }: Props) {
   const L = s.profile.locale;
   const fileRef = useRef<HTMLInputElement>(null);
+  const wallInputRef = useRef<HTMLInputElement>(null);
+  const customUrlsRef = useRef<Set<string>>(new Set());
   const [dataMsg, setDataMsg] = useState<Msg>(null);
   const [permMsg, setPermMsg] = useState<Msg>(null);
+  const [customWalls, setCustomWalls] = useState<{ item: CustomWallpaper; url: string }[]>([]);
+  const [bgErr, setBgErr] = useState('');
   const [engName, setEngName] = useState('');
   const [engUrl, setEngUrl] = useState('');
   const [engErr, setEngErr] = useState('');
+  const [radioState, setRadioState] = useState(() => radioPlayer.getState());
   const visibleCount = s.search.engines.filter((e) => e.visible).length;
+
+  useEffect(() => radioPlayer.subscribe(() => setRadioState(radioPlayer.getState())), []);
+
+  useEffect(() => {
+    let alive = true;
+    void listCustomWallpapers().then((items) => {
+      if (!alive) return;
+      const mapped = items.map((item) => {
+        const url = URL.createObjectURL(item.blob);
+        customUrlsRef.current.add(url);
+        return { item, url };
+      });
+      setCustomWalls(mapped);
+    });
+    return () => {
+      alive = false;
+      customUrlsRef.current.forEach((u) => URL.revokeObjectURL(u));
+      customUrlsRef.current.clear();
+    };
+  }, []);
+
+  const uploadCustomWalls = async (files: FileList | null) => {
+    const list = files ? Array.from(files) : [];
+    if (wallInputRef.current) wallInputRef.current.value = '';
+    if (!list.length) return;
+    setBgErr('');
+    const added: { item: CustomWallpaper; url: string }[] = [];
+    for (const file of list) {
+      const okMime = CUSTOM_ACCEPT_MIME.has(file.type) || /\.(jpe?g|png|webp|gif)$/i.test(file.name);
+      if (!okMime) { setBgErr(t(L, 'bgErrType')); continue; }
+      if (file.size > MAX_CUSTOM_BYTES) { setBgErr(t(L, 'bgErrSize')); continue; }
+      try {
+        const item = await saveCustomWallpaper(file);
+        const url = URL.createObjectURL(item.blob);
+        customUrlsRef.current.add(url);
+        added.push({ item, url });
+      } catch {
+        setBgErr(t(L, 'bgErrStore'));
+      }
+    }
+    if (added.length) {
+      setCustomWalls((prev) => [...added.reverse(), ...prev]);
+      const chosen = added[added.length - 1]!.item.id;
+      update((d) => {
+        d.background.kind = 'image';
+        d.background.mediaId = chosen;
+      });
+    }
+  };
+
+  const removeCustomWall = async (id: string) => {
+    await deleteCustomWallpaper(id);
+    setCustomWalls((prev) => {
+      const target = prev.find((x) => x.item.id === id);
+      if (target) {
+        URL.revokeObjectURL(target.url);
+        customUrlsRef.current.delete(target.url);
+      }
+      return prev.filter((x) => x.item.id !== id);
+    });
+    if (s.background.kind === 'image' && s.background.mediaId === id) {
+      update((d) => {
+        d.background.kind = 'scene';
+        d.background.sceneId = defaultWallpaperForTheme(d.theme.id).id;
+        delete d.background.mediaId;
+      });
+    }
+  };
+
+  const pickTheme = (nextTheme: ThemeId) => {
+    update((d) => {
+      d.theme.id = nextTheme;
+      if (d.background.kind === 'scene') {
+        d.background.sceneId = defaultWallpaperForTheme(nextTheme).id;
+      }
+    });
+  };
+
+  const themeWalls = wallpapersForTheme(s.theme.id);
+  const resolvedWall = resolveWallpaper(s.theme.id, s.background.sceneId);
 
   const ensureActiveVisible = (d: Settings) => {
     if (!d.search.engines.some((e) => e.id === d.search.active && e.visible)) d.search.active = d.search.engines.find((e) => e.visible)?.id ?? d.search.engines[0]!.id;
@@ -173,8 +259,8 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
           <div class="nd-theme-grid" role="radiogroup" aria-labelledby="nd-lbl-theme">
             {THEME_IDS.map((o, i) => (
               <button key={o} type="button" role="radio" aria-checked={s.theme.id === o} class="nd-theme-card nd-chamfer" data-theme-card={o}
-                onClick={() => update((d) => { d.theme.id = o; })}
-                onKeyDown={(e) => onRadioKey(THEME_IDS, i, (v) => update((d) => { d.theme.id = v; }), e)}>
+                onClick={() => pickTheme(o)}
+                onKeyDown={(e) => onRadioKey(THEME_IDS, i, pickTheme, e)}>
                 <span class="nd-theme-card__top">
                   <span class="nd-theme-card__swatches" aria-hidden="true">
                     <span class="nd-swatch nd-swatch--pri" />
@@ -187,6 +273,105 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
               </button>
             ))}
           </div>
+        </div>
+        <div class="nd-field">
+          <span id="nd-lbl-wall">{t(L, 'wallpaper')}</span>
+          <div class="nd-wall-grid" role="radiogroup" aria-labelledby="nd-lbl-wall">
+            {themeWalls.map((w, i) => {
+              const active = s.background.kind === 'scene' && resolvedWall.id === w.id;
+              const pickWall = (nextId: string) => update((d) => {
+                d.background.kind = 'scene';
+                d.background.sceneId = nextId;
+                delete d.background.mediaId;
+              });
+              return (
+                <button
+                  key={w.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  class="nd-wall-card nd-chamfer"
+                  onClick={() => pickWall(w.id)}
+                  onKeyDown={(e) => onRadioKey(themeWalls.map((x) => x.id), i, pickWall, e)}
+                >
+                  {(w.thumb ?? w.image) ? <img class="nd-wall-card__thumb" data-pos={w.position === 'top' ? 'top' : undefined} src={w.thumb ?? w.image} alt="" loading="lazy" /> : <span class="nd-wall-card__thumb nd-wall-card__thumb--scene" aria-hidden="true" />}
+                  <span class="nd-wall-card__meta">
+                    <span class="nd-wall-card__name">{wallpaperLabel(w, L)}</span>
+                    <span class={`nd-wall-card__tag ${w.live ? 'nd-wall-card__tag--live' : ''}`}>{t(L, w.live ? 'bgLive' : 'bgStatic')}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <label class="nd-field">
+          <span class="nd-row"><span>{t(L, 'bgBrightness')}</span><span class="nd-amb__pct">{s.background.brightness}%</span></span>
+          <input
+            type="range"
+            class="nd-range"
+            min={30}
+            max={120}
+            value={s.background.brightness}
+            onInput={(e) => {
+              const v = Math.max(30, Math.min(120, Number(e.currentTarget.value)));
+              update((d) => { d.background.brightness = v; });
+            }}
+          />
+        </label>
+        <div class="nd-field">
+          <div class="nd-custom-head">
+            <span id="nd-lbl-custom">{t(L, 'bgCustomTitle')}</span>
+            <button type="button" class="nd-btn nd-btn--sm" onClick={() => wallInputRef.current?.click()}>
+              <Icon name="upload" size={14} /> {t(L, 'bgUploadBtn')}
+            </button>
+            <input
+              ref={wallInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              multiple
+              class="nd-file-input"
+              tabIndex={-1}
+              aria-hidden="true"
+              onChange={(e) => void uploadCustomWalls(e.currentTarget.files)}
+            />
+          </div>
+          {customWalls.length > 0 && (
+            <div class="nd-custom-grid" role="radiogroup" aria-labelledby="nd-lbl-custom">
+              {customWalls.map(({ item, url }) => {
+                const active = s.background.kind === 'image' && s.background.mediaId === item.id;
+                return (
+                  <div key={item.id} class="nd-custom-wrap">
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={active}
+                      class="nd-wall-card nd-chamfer"
+                      onClick={() => update((d) => {
+                        d.background.kind = 'image';
+                        d.background.mediaId = item.id;
+                      })}
+                    >
+                      <img class="nd-wall-card__thumb" src={url} alt="" />
+                      <span class="nd-wall-card__meta">
+                        <span class="nd-wall-card__name">{item.name}</span>
+                      </span>
+                    </button>
+                    <button
+                      type="button"
+                      class="nd-custom-del"
+                      aria-label={t(L, 'bgDelete', { name: item.name })}
+                      title={t(L, 'bgDelete', { name: item.name })}
+                      onClick={() => void removeCustomWall(item.id)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {bgErr && <p class="nd-error" role="alert">{bgErr}</p>}
+          <p class="nd-hint">{t(L, 'bgUploadHint')}</p>
         </div>
         {segmented('scanlines', s.theme.scanlines, SCANLINE_MODES, (o) => t(L, `scan_${o}`), (v) => update((d) => { d.theme.scanlines = v; }))}
         {segmented('chamfer', s.theme.chamfer, CHAMFER_SIZES, (o) => t(L, `chamfer_${o}`), (v) => update((d) => { d.theme.chamfer = v; }))}
@@ -220,7 +405,7 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
         </label>
         <div class="nd-field">
           <span id="nd-lbl-amb-track">{audioText(L, 'ambientTrack')}</span>
-          <div class="nd-seg nd-seg--3" role="radiogroup" aria-labelledby="nd-lbl-amb-track">
+          <div class="nd-amb-grid" role="radiogroup" aria-labelledby="nd-lbl-amb-track">
             {AMBIENT_TRACKS.map((tr, i) => {
               const pickTrack = (next: AmbientTrack) => {
                 update((d) => { d.audio.ambient.track = next; });
@@ -255,9 +440,41 @@ export function SettingsDrawer({ s, update, replace, onClose }: Props) {
               const v = Math.max(0, Math.min(1, Number(e.currentTarget.value) / 100));
               update((d) => { d.audio.ambient.volume = v; });
               ambientEngine.setVolume(v);
+              localPlayer.setVolume(v);
+              radioPlayer.setVolume(v);
             }}
           />
         </label>
+        {RADIO_STATIONS.length > 0 && (() => {
+          const st = RADIO_STATIONS.find((x) => x.id === radioState.stationId) ?? RADIO_STATIONS[0]!;
+          const tr = st.tracks[radioState.trackIndex] ?? st.tracks[0];
+          const num = String((tr?.index ?? 0) + 1).padStart(2, '0');
+          return (
+            <div class="nd-settings-radio">
+              <div class="nd-settings-radio__meta">
+                <span class="nd-radio__artist">{st.name}</span>
+                {tr && <span class="nd-radio__title">#{num} {tr.title} — {tr.artist}</span>}
+              </div>
+              <div class="nd-row">
+                {radioState.source === 'mp3' && (
+                  <button
+                    type="button"
+                    class={`nd-btn nd-btn--sm${radioState.playing ? '' : ' nd-btn--primary'}`}
+                    onClick={() => radioPlayer.togglePlayPause(s.audio.ambient.volume)}
+                  >
+                    <Icon name={radioState.playing ? 'pause' : 'play2'} size={13} />
+                    {audioText(L, radioState.playing ? 'ambStop' : 'ambPlay')}
+                  </button>
+                )}
+                {onOpenRadio && (
+                  <button type="button" class="nd-btn nd-btn--sm" onClick={onOpenRadio}>
+                    <Icon name="radio" size={13} /> {audioText(L, 'radioOpen')}
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })()}
       </Section>
 
       <Section title={t(L, 'secDisplay')}>

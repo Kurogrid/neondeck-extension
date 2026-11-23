@@ -67,6 +67,7 @@ const PATHS: Record<string, string> = {
   play2: 'M7 5l12 7-12 7z',
   pause: 'M7 5h4v14H7zM13 5h4v14h-4z',
   reset: 'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5',
+  prev: 'M19 5l-10 7 10 7zM7 5v14',
   skip: 'M5 5l10 7-10 7zM17 5v14',
   sun: 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
   moon: 'M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z',

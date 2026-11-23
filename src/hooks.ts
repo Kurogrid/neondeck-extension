@@ -37,11 +37,12 @@ export function usePermission(p: OptionalPerm): PermissionState {
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 /** Modal behaviour: Escape closes, Tab is trapped inside, focus is restored on close. */
-export function useDialog<T extends HTMLElement>(onClose: () => void) {
+export function useDialog<T extends HTMLElement>(onClose: () => void, active = true) {
   const ref = useRef<T>(null);
   const close = useRef(onClose);
   close.current = onClose;
   useEffect(() => {
+    if (!active) return;
     const prev = document.activeElement as HTMLElement | null;
     const el = ref.current;
     (el?.querySelector<HTMLElement>('[data-autofocus]') ?? el?.querySelector<HTMLElement>(FOCUSABLE))?.focus();
@@ -58,6 +59,6 @@ export function useDialog<T extends HTMLElement>(onClose: () => void) {
     };
     document.addEventListener('keydown', onKey, true);
     return () => { document.removeEventListener('keydown', onKey, true); prev?.focus?.(); };
-  }, []);
+  }, [active]);
   return ref;
 }

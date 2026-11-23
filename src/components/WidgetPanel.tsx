@@ -122,9 +122,20 @@ export function WidgetPanel({ s, update }: { s: Settings; update: Update }) {
     <aside class={`nd-widgets${managing ? ' is-editing' : ''}`} aria-label={t(L, 'widgets')}>
       <div class="nd-section-head">
         <h2 class="nd-section-title">{t(L, 'widgets')}</h2>
-        <button type="button" class="nd-icon-btn" aria-pressed={managing} aria-label={t(L, 'manageWidgets')} title={t(L, 'manageWidgets')} onClick={() => setManaging(!managing)}>
-          <Icon name={managing ? 'check' : 'edit'} />
-        </button>
+        <div class="nd-actions">
+          <button type="button" class="nd-icon-btn" aria-pressed={managing} aria-label={t(L, 'manageWidgets')} title={t(L, 'manageWidgets')} onClick={() => setManaging(!managing)}>
+            <Icon name={managing ? 'check' : 'edit'} />
+          </button>
+          <button
+            type="button"
+            class="nd-icon-btn"
+            onClick={() => update((d) => { d.display.showWidgets = false; })}
+            aria-label={t(L, 'hideWidgets')}
+            title={t(L, 'hideWidgets')}
+          >
+            <Icon name="close" />
+          </button>
+        </div>
       </div>
       {managing && <p class="nd-hint">{t(L, 'dragHint')}</p>}
       {managing && <Manager s={s} update={update} dnd={dnd} />}
