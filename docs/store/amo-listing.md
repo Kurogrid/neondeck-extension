@@ -8,6 +8,18 @@
 - Both come from `npm run package` on a clean, committed tree.
 - Compatibility: Firefox (desktop) only.
 
+## Screenshots (Edit Product Page → Images)
+`docs/store/screenshots/` (all 1280x800, captured from the dev server with English UI), in this order, with captions:
+1. `01-edgerunners.png`: Edgerunners: neon rooftop wallpaper, live weather and a Pomodoro dial
+2. `02-arasaka.png`: Arasaka: red corporate HUD with a sweeping radar, world clock, tasks and habit streaks
+3. `03-samurai.png`: Samurai: stage-light theme with a music track for every theme
+4. `04-ghost.png`: Ghost: green cyberspace with scratchpad notes and Pomodoro
+5. `05-orchid.png`: Acid Orchid: synth horizon, weather and world clock
+6. `06-settings.png`: Settings: five themes, live wallpapers or upload your own
+7. `07-widgets.png`: Widgets you arrange by drag and drop: tasks, habits, AI links and more
+
+No radio screenshot: the Spotify embed shows third-party album art.
+
 ## Distribution
 - Untick **"This add-on is experimental"** (1.0.0 is the first stable release).
 
