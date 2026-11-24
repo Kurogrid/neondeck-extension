@@ -1,5 +1,7 @@
 # NEONDECK
 
+![NEONDECK 1.0: cyberpunk HUD new tab](docs/store/web/og-neondeck-1.0.png)
+
 [![CI](https://github.com/Kurogrid/neondeck-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/Kurogrid/neondeck-extension/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-c6ff3d.svg)](LICENSE)
 
 A cyberpunk HUD new tab dashboard for Firefox and Chrome: big clock, multi-engine search, netlinks with keyboard shortcuts, and a side panel of focus widgets. Private by design: no account, no tracking, no remote code.
@@ -16,6 +18,16 @@ _Türkçe özet aşağıda._
 - **Sound**: optional UI sounds and an ambient widget (rain, synth pad), synthesized locally with WebAudio, never autoplays.
 - **Data**: everything stays in local extension storage; JSON export/import (also imports exports from the Cyberstart extension).
 - **Languages**: English, Turkish.
+
+## Screenshots
+![The five NEONDECK themes: Edgerunners, Samurai, Arasaka, Ghost and Acid Orchid](docs/store/web/hero-themes-showcase.png)
+
+| | |
+|---|---|
+| ![Edgerunners theme: neon rooftop, weather and Pomodoro](docs/store/screenshots/01-edgerunners.png) | ![Arasaka theme: red radar HUD, world clock, tasks and habits](docs/store/screenshots/02-arasaka.png) |
+| ![Samurai theme with theme music in the ambient sound widget](docs/store/screenshots/03-samurai.png) | ![Ghost theme: scratchpad and Pomodoro](docs/store/screenshots/04-ghost.png) |
+| ![Acid Orchid theme: weather and world clock](docs/store/screenshots/05-orchid.png) | ![Settings: five themes and live wallpapers](docs/store/screenshots/06-settings.png) |
+| ![Widget manager: drag and drop to reorder](docs/store/screenshots/07-widgets.png) | |
 
 ## Install
 - **Firefox**: [NEONDECK on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/neondeck/).
