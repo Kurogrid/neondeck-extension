@@ -31,6 +31,7 @@ _Türkçe özet aşağıda._
 
 ## Install
 - **Firefox**: [NEONDECK on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/neondeck/).
+- **Chrome / Edge**: download `neondeck-<version>-chrome.zip` from the [latest release](https://github.com/Kurogrid/neondeck-extension/releases/latest), unzip it, then `chrome://extensions` → Developer mode → Load unpacked → the unzipped folder.
 - **From source**: build it (below), then
   - Firefox: `about:debugging` → This Firefox → Load Temporary Add-on → `dist-firefox/manifest.json`
   - Chrome: `chrome://extensions` → Developer mode → Load unpacked → `dist/`
