@@ -10,6 +10,9 @@ A cyberpunk HUD new tab dashboard for Firefox and Chrome: big clock, multi-engin
 
 _Türkçe özet aşağıda._
 
+## Demo
+![NEONDECK 1.1 demo: switching between the five themes, search shortcut and settings](docs/store/web/neondeck-1.1-demo.gif)
+
 ## Features
 - **Command deck**: greeting, clock and date (12/24-hour), search with Google, DuckDuckGo, Bing, Brave, ChatGPT, Perplexity, YouTube or your own engine. `/` focuses search, `1`–`9` open your top links.
 - **Netlinks**: saved sites as cards in collapsible categories; import browser bookmarks (optional permission).
