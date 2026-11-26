@@ -230,6 +230,8 @@
 :root[data-glitch='on'] .nd-clock__digits[data-text]::before,
 :root[data-glitch='on'] .nd-clock__digits[data-text]::after {
   content: attr(data-text);
+  /* Decorative copy: empty alt text keeps screen readers from reading the greeting/clock three times. */
+  content: attr(data-text) / '';
   position: absolute;
   inset: 0;
   pointer-events: none;

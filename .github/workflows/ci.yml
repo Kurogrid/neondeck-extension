@@ -24,3 +24,19 @@ jobs:
       - run: npm run verify
       # Firefox build (manifest rewrite + checks)
       - run: node scripts/build-firefox.mjs
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # production build for the CSP and performance tests (e2e/build.e2e.ts)
+      - run: npm run build
+      # end-to-end tests: dev server + built dist/ under its CSP; outside requests are blocked
+      - run: npm run test:e2e

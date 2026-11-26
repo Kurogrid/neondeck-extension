@@ -117,7 +117,7 @@ export function App() {
     !s.display.showSearch &&
     s.theme.id === 'arasaka' &&
     s.background.kind === 'scene' &&
-    resolveWallpaper(s.theme.id, s.background.sceneId).id === 'arasaka-mainframe';
+    resolveWallpaper(s.theme.id, s.background.sceneId).id === 'arasaka';
 
   return (
     <div class="nd-root">

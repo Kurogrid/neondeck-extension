@@ -2,7 +2,7 @@ import { mulberry32 } from './rng';
 import type { WallpaperOverlay } from './types';
 
 // Shows the original gate emblem (banner + terminal) on the Arasaka theme.
-export const ARASAKA_FAN_EMBLEM = false;
+export const ARASAKA_FAN_EMBLEM = true;
 
 export interface OverlayRenderer {
   render(ctx: CanvasRenderingContext2D, w: number, h: number, t: number): void;

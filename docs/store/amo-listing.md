@@ -12,7 +12,7 @@
 `docs/store/screenshots/` (all 1280x800, captured from the dev server with English UI), in this order, with captions:
 1. `01-edgerunners.png`: Edgerunners: neon rooftop wallpaper, live weather and a Pomodoro dial
 2. `02-arasaka.png`: Arasaka: red corporate HUD with a sweeping radar, world clock, tasks and habit streaks
-3. `03-samurai.png`: Samurai: stage-light theme with a music track for every theme
+3. `03-samurai.png`: Samurai: rain-soaked overpass at night, with a music track for every theme
 4. `04-ghost.png`: Ghost: green cyberspace with scratchpad notes and Pomodoro
 5. `05-orchid.png`: Acid Orchid: synth horizon, weather and world clock
 6. `06-settings.png`: Settings: five themes, live wallpapers or upload your own
@@ -31,7 +31,7 @@ NEONDECK turns every new tab into a neon command deck: five themes with live wal
 
 THEMES
 • Edgerunners: neon rain city at night
-• Arasaka: red corporate HUD with a sweeping radar
+• Arasaka: red corporate HUD with a sweeping radar and a "Security Login" search panel
 • Ghost: green signal rain and circuit traces
 • Acid Orchid: purple synth horizon over a neon grid
 • Samurai: red and cyan stage lights
@@ -68,8 +68,14 @@ English and Turkish interface. Open source (MIT): https://github.com/Kurogrid/ne
 
 NEONDECK is an independent fan-made project. It is not affiliated with, endorsed by or sponsored by CD PROJEKT, Netflix or any other rights holder; theme names refer to the moods they evoke.
 
+## Release notes (version 1.1.0)
+Arasaka theme: a corporate "Security Login" search panel with an original gate emblem, and a corporate banner when the search bar is hidden. Under the hood: accessibility fixes (screen readers no longer read the greeting and clock three times) and new automated checks for accessibility, content security policy and performance. Your settings are kept.
+
 ## Release notes (version 1.0.0)
 First stable release. New Samurai theme; live wallpapers with animated HUD overlays and your own wallpaper upload; a music track for every theme (synthesized locally); a local music player for your own files; an optional Spotify radio that loads only when you open it; close buttons on dialogs and visual polish across all themes. Your settings are kept.
+
+## Notes for reviewers (1.1.0)
+- 1.1.0 changes UI code only (Arasaka search panel and banner, drawn as inline SVG from original paths; a CSS accessibility fix). No new permissions, hosts or libraries. Build steps unchanged.
 
 ## Notes for reviewers (1.0.0)
 - Build: see BUILD.md in the source zip. `npm ci && npm run build:firefox` produces `dist-firefox/`, identical to the uploaded package (verified locally). Built on Windows 11 with Node 24.20.0 / npm 11.19.0; only public npm packages.

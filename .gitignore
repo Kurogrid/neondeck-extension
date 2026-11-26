@@ -5,6 +5,8 @@ dist/
 .env.*
 release/
 dist-firefox/
+test-results/
+playwright-report/
 
 # signing keys and packed extensions (never commit)
 *.pem
