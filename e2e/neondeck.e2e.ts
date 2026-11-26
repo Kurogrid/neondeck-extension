@@ -159,6 +159,9 @@ test.describe('motion', () => {
     await open(page);
     const canvas = page.locator('canvas').first();
     await expect(canvas).toBeVisible();
+    // Let the wallpaper decode and the first frame settle; a static scene must then stay identical.
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(1000);
     const a = await canvas.screenshot();
     await page.waitForTimeout(800);
     const b = await canvas.screenshot();

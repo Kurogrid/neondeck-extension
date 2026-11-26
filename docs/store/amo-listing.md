@@ -1,6 +1,6 @@
 # Firefox Add-ons (addons.mozilla.org): NEONDECK
 
-> Updated 2026-11-27. 1.0.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/); 1.1.0 was submitted on 2026-11-27. For a new version use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
+> Updated 2026-11-27. 1.1.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/), approved 2026-11-27; 1.1.1 submitted 2026-11-27. For a new version use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
 
 ## Files to upload (Upload New Version)
 - **Add-on file**: `release/neondeck-<version>-firefox.zip`
@@ -68,11 +68,17 @@ English and Turkish interface. Open source (MIT): https://github.com/Kurogrid/ne
 
 NEONDECK is an independent fan-made project. It is not affiliated with, endorsed by or sponsored by CD PROJEKT, Netflix or any other rights holder; theme names refer to the moods they evoke.
 
+## Release notes (version 1.1.1)
+Easier to read on every theme: stronger contrast for the date, section titles, quotes and widget text over the live wallpapers (WCAG AA). Your settings are kept.
+
 ## Release notes (version 1.1.0)
 Arasaka theme: a corporate "Security Login" search panel with an original gate emblem, and a corporate banner when the search bar is hidden. Under the hood: accessibility fixes (screen readers no longer read the greeting and clock three times) and new automated checks for accessibility, content security policy and performance. Your settings are kept.
 
 ## Release notes (version 1.0.0)
 First stable release. New Samurai theme; live wallpapers with animated HUD overlays and your own wallpaper upload; a music track for every theme (synthesized locally); a local music player for your own files; an optional Spotify radio that loads only when you open it; close buttons on dialogs and visual polish across all themes. Your settings are kept.
+
+## Notes for reviewers (1.1.1)
+- 1.1.1 changes CSS only (colour and backdrop values for text contrast in `src/theme/`). No new permissions, hosts or libraries. Build steps unchanged.
 
 ## Notes for reviewers (1.1.0)
 - 1.1.0 changes UI code only (Arasaka search panel and banner, drawn as inline SVG from original paths; a CSS accessibility fix). No new permissions, hosts or libraries. Build steps unchanged.
