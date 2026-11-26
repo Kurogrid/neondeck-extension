@@ -24,7 +24,7 @@ _Türkçe özet aşağıda._
 
 | | |
 |---|---|
-| ![Edgerunners theme: neon rooftop, weather and Pomodoro](docs/store/screenshots/01-edgerunners.png) | ![Arasaka theme: red radar HUD, world clock, tasks and habits](docs/store/screenshots/02-arasaka.png) |
+| ![Edgerunners theme: neon rooftop, weather and Pomodoro](docs/store/screenshots/01-edgerunners.png) | ![Arasaka theme: corporate HUD with the Security Login search panel, world clock, tasks and habits](docs/store/screenshots/02-arasaka.png) |
 | ![Samurai theme with theme music in the ambient sound widget](docs/store/screenshots/03-samurai.png) | ![Ghost theme: scratchpad and Pomodoro](docs/store/screenshots/04-ghost.png) |
 | ![Acid Orchid theme: weather and world clock](docs/store/screenshots/05-orchid.png) | ![Settings: five themes and live wallpapers](docs/store/screenshots/06-settings.png) |
 | ![Widget manager: drag and drop to reorder](docs/store/screenshots/07-widgets.png) | |

@@ -11,7 +11,7 @@
 ## Screenshots (Edit Product Page → Images)
 `docs/store/screenshots/` (all 1280x800, captured from the dev server with English UI), in this order, with captions:
 1. `01-edgerunners.png`: Edgerunners: neon rooftop wallpaper, live weather and a Pomodoro dial
-2. `02-arasaka.png`: Arasaka: red corporate HUD with a sweeping radar, world clock, tasks and habit streaks
+2. `02-arasaka.png`: Arasaka: corporate HUD with a Security Login search panel, world clock, tasks and habit streaks
 3. `03-samurai.png`: Samurai: rain-soaked overpass at night, with a music track for every theme
 4. `04-ghost.png`: Ghost: green cyberspace with scratchpad notes and Pomodoro
 5. `05-orchid.png`: Acid Orchid: synth horizon, weather and world clock
