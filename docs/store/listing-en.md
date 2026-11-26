@@ -1,6 +1,6 @@
 # Chrome Web Store listing: English
 
-> Draft, 2026-11-12. Lines marked **(after Faz 2)** describe upcoming visual work; check them against the final build before submitting.
+> Updated 2026-11-27 for 1.1.0. Not submitted to the Chrome Web Store yet; Chrome users install from the GitHub release.
 
 ## Name
 NEONDECK
@@ -38,21 +38,26 @@ NEONDECK replaces Chrome's new tab page with a fast, private dashboard styled li
 • Scratchpad with multiple notes
 • Tasks and daily habits with streaks
 • Pomodoro focus timer that survives closing the tab
+• Ambient sound: rain, synth pad and a music track for every theme, generated in your browser; never autoplays
+• Local music player for your own audio files; they stay in your browser
 • AI quick access: Claude, Gemini, ChatGPT or your own links
 
 **LOOK & FEEL**
-• Four themes: Edgerunners, Arasaka, Ghost, Acid Orchid, each with its own animated background
-• Corner-cut panels, scanlines and glitch accents, low-power mode and reduced-motion support **(after Faz 2: confirm effects)**
-• Live animated backgrounds **(after Faz 2)**
+• Five themes: Edgerunners, Arasaka, Ghost, Acid Orchid, Samurai, each with live wallpapers or an animated background
+• Arasaka adds a corporate "Security Login" search panel
+• Upload your own wallpaper (stored only in your browser)
+• Corner-cut panels, HUD frames, CRT scanlines and glitch accents you can tune or turn off
+• Low-power mode and reduced-motion support: animations stop completely
 
 **PRIVATE BY DESIGN**
 • Installs with storage permission only; extra permissions are asked only when you click
 • Settings stay on your device; export and import them as a JSON file
 • No remote code, strict content security policy
+• Optional Spotify radio loads Spotify's player only when you open it
 
 English and Turkish interface.
 
-NEONDECK is an independent project and is not affiliated with any game, film or brand.
+NEONDECK is an independent fan-made project. It is not affiliated with, endorsed by or sponsored by CD PROJEKT, Netflix or any other rights holder; theme names refer to the moods they evoke.
 
 ## Single purpose (dashboard field)
 NEONDECK replaces the new tab page with a personal dashboard (clock, search box, saved links and small productivity widgets). It does not change the default search engine or any other browser setting.
@@ -66,7 +71,7 @@ NEONDECK replaces the new tab page with a personal dashboard (clock, search box,
 ## Data usage (Privacy practices tab)
 Suggested answers (the decision is the publisher's):
 - **Location**: declare "approximate location" as handled: only when the user enables the Weather widget, the chosen city's rounded coordinates go to Open-Meteo to get the forecast. It is not sent to the developer, not sold, not used for anything else.
-- All other data types: not collected.
+- All other data types: not collected. The optional Spotify radio is Spotify's own embedded player in a frame; NEONDECK sends it nothing and receives nothing from it.
 - Certify: not sold to third parties; not used for purposes unrelated to the single purpose; not used for creditworthiness or lending.
 
 ## Privacy policy URL

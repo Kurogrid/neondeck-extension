@@ -1,10 +1,10 @@
-# Firefox Add-ons (addons.mozilla.org): NEONDECK 1.0.0
+# Firefox Add-ons (addons.mozilla.org): NEONDECK
 
-> Prepared 2026-11-23. 0.2.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/). For 1.0.0 use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
+> Updated 2026-11-27. 1.0.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/); 1.1.0 was submitted on 2026-11-27. For a new version use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
 
 ## Files to upload (Upload New Version)
-- **Add-on file**: `release/neondeck-1.0.0-firefox.zip`
-- **Source code** (Vite bundles/minifies the code): `release/neondeck-1.0.0-source.zip`
+- **Add-on file**: `release/neondeck-<version>-firefox.zip`
+- **Source code** (Vite bundles/minifies the code): `release/neondeck-<version>-source.zip`
 - Both come from `npm run package` on a clean, committed tree.
 - Compatibility: Firefox (desktop) only.
 
@@ -21,7 +21,7 @@
 No radio screenshot: the Spotify embed shows third-party album art.
 
 ## Distribution
-- Untick **"This add-on is experimental"** (1.0.0 is the first stable release).
+- "This add-on is experimental" stays unticked (stable since 1.0.0).
 
 ## Summary (max 250 characters)
 A cyberpunk HUD new tab with five themes, live wallpapers, CRT and glitch effects, theme music, multi-engine search, netlinks and a widget panel: weather, Pomodoro, tasks, ambient sound. No account, no tracking.

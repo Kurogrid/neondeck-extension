@@ -22,8 +22,9 @@ npm run build:firefox
 - [Vite](https://vite.dev/) (open source, MIT): bundles and minifies the TypeScript/Preact source in `src/`.
 - [TypeScript](https://www.typescriptlang.org/) (Apache-2.0): type checking only.
 - [Preact](https://preactjs.com/) (MIT): the only runtime library, bundled from npm.
+- Tests only, not needed for the build: Vitest, Playwright and axe-core (`npm test`, `npm run test:e2e`).
 
 ## Source layout
-- `src/`: application code (TypeScript + Preact). `src/core/` storage, validation, permissions; `src/widgets/` widget logic and views.
+- `src/`: application code (TypeScript + Preact). `src/core/` storage, validation, permissions; `src/widgets/` widget logic and views; `src/theme/`, `src/scenes/`, `src/audio/` themes, canvas scenes and WebAudio sound.
 - `public/`: manifest, locales, icons (copied as-is).
 - `scripts/`: build, packaging and manifest checks.

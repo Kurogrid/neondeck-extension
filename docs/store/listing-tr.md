@@ -1,6 +1,6 @@
 # Chrome Web Store mağaza metni: Türkçe
 
-> Taslak, 12.11.2026. **(Faz 2 sonrası)** işaretli satırlar sonraki görsel işi anlatır; göndermeden önce son sürümle karşılaştır.
+> 1.1.0 için güncellendi, 27.11.2026. Chrome Web Store'a henüz gönderilmedi; Chrome kullanıcıları GitHub sürümünden kurar.
 
 ## Ad
 NEONDECK
@@ -32,21 +32,26 @@ NEONDECK, Chrome'un yeni sekme sayfasını cyberpunk HUD tarzında hızlı ve gi
 • Çoklu not destekli not defteri
 • Görevler ve seri takipli günlük alışkanlıklar
 • Sekmeyi kapatsan da kaldığı yerden devam eden Pomodoro sayacı
+• Ortam sesi: yağmur, synth pad ve her tema için bir müzik, tarayıcında üretilir; kendiliğinden çalmaz
+• Kendi ses dosyaların için yerel müzik çalar; dosyalar tarayıcında kalır
 • AI hızlı erişim: Claude, Gemini, ChatGPT ya da kendi bağlantıların
 
 **GÖRÜNÜM**
-• Dört tema: Neon Nabız, Kızıl Protokol, Hayalet Sinyal, Asit Orkide
-• Köşesi kesik paneller, tarama çizgileri ve glitch vurguları, düşük güç modu ve azaltılmış hareket desteği **(Faz 2 sonrası: efektleri doğrula)**
-• Canlı animasyonlu arka planlar **(Faz 2 sonrası)**
+• Beş tema: Edgerunners, Arasaka, Ghost, Asit Orkide, Samurai; her biri canlı duvar kâğıtları ya da hareketli arka planıyla
+• Arasaka'da kurumsal "Security Login" arama paneli
+• Kendi duvar kâğıdını yükle (yalnızca tarayıcında saklanır)
+• Köşesi kesik paneller, HUD çerçeveleri, CRT tarama çizgileri ve glitch vurguları; ayarlanabilir ya da kapatılabilir
+• Düşük güç modu ve azaltılmış hareket desteği: animasyonlar tamamen durur
 
 **GİZLİLİK ÖNCELİKLİ**
 • Yalnızca depolama izniyle kurulur; diğer izinler sadece sen tıklayınca istenir
 • Ayarların cihazında kalır; JSON dosyası olarak dışa/içe aktarabilirsin
 • Uzak kod yok, sıkı içerik güvenlik politikası
+• Opsiyonel Spotify radyosu, Spotify oynatıcısını yalnızca sen açınca yükler
 
 Türkçe ve İngilizce arayüz.
 
-NEONDECK bağımsız bir projedir; hiçbir oyun, film ya da markayla bağlantısı yoktur.
+NEONDECK bağımsız bir hayran projesidir. CD PROJEKT, Netflix ya da başka bir hak sahibiyle bağlantısı yoktur, onlar tarafından onaylanmamış ya da desteklenmemiştir; tema adları çağrıştırdıkları havayı anlatır.
 
 ## Tek amaç, izin gerekçeleri, veri kullanımı
 Mağaza panelindeki bu alanlar İngilizce doldurulur; metinler `listing-en.md` dosyasında.
