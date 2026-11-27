@@ -11,7 +11,9 @@ A cyberpunk HUD new tab dashboard for Firefox and Chrome: big clock, multi-engin
 _Türkçe özet aşağıda._
 
 ## Demo
-![NEONDECK 1.1 demo: switching between the five themes, search shortcut and settings](docs/store/web/neondeck-1.1-demo.gif)
+[![NEONDECK demo, recorded in 4K: switching between the five themes, the Arasaka Security Login panel, the search shortcut and the widget panel](docs/store/web/neondeck-demo-poster-1080.webp)](https://kurogrid.github.io/neondeck/#demo)
+
+▶ Watch the 21-second demo [on the website](https://kurogrid.github.io/neondeck/#demo) or download it in 4K: [`neondeck-demo-4k.mp4`](docs/store/web/neondeck-demo-4k.mp4) (15 MB).
 
 ## Features
 - **Command deck**: greeting, clock and date (12/24-hour), search with Google, DuckDuckGo, Bing, Brave, ChatGPT, Perplexity, YouTube or your own engine. `/` focuses search, `1`–`9` open your top links.
