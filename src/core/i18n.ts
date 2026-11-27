@@ -104,6 +104,7 @@ const en = {
   warn_remoteBackgroundDropped: 'Online background images are not supported; a built-in scene is used.',
   warn_rssDropped: 'The RSS widget is planned for a later version and was skipped.',
   warn_newerVersion: 'This backup comes from a newer NEONDECK version; some settings may be ignored.',
+  openGuide: 'Setup guide',
   resetBtn: 'Reset to defaults',
   resetConfirm: 'Reset every setting and remove all netlinks?',
   // audio
@@ -323,6 +324,7 @@ const tr: Dict = {
   warn_remoteBackgroundDropped: 'Çevrimiçi arka plan görselleri desteklenmiyor; yerleşik sahne kullanılıyor.',
   warn_rssDropped: 'RSS widget’ı sonraki bir sürüme planlandı, atlandı.',
   warn_newerVersion: 'Bu yedek daha yeni bir NEONDECK sürümünden; bazı ayarlar yok sayılabilir.',
+  openGuide: 'Kullanım kılavuzu',
   resetBtn: 'Varsayılanlara dön',
   resetConfirm: 'Tüm ayarlar sıfırlansın ve bütün netlink’ler silinsin mi?',
   // audio

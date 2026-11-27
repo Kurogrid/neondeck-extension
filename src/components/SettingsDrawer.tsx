@@ -530,6 +530,7 @@ export function SettingsDrawer({ s, update, replace, onClose, onOpenRadio }: Pro
             onChange={(e) => void doImport(e.currentTarget.files?.[0])} />
         </div>
         <Status msg={dataMsg} />
+        <a class="nd-btn nd-btn--sm" href="welcome.html" target="_blank" rel="noopener"><Icon name="book" size={16} /> {t(L, 'openGuide')}</a>
         <button type="button" class="nd-btn nd-btn--sm nd-btn--danger" onClick={doReset}>{t(L, 'resetBtn')}</button>
       </Section>
     </Modal>

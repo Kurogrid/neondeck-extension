@@ -23,6 +23,14 @@ const pinned = {
 for (const [name, want] of Object.entries(pinned)) if (directive(name) !== want) errs.push(`CSP ${name} must be "${want}", got "${directive(name)}"`);
 for (const f of Object.values(m.icons ?? {})) if (!existsSync('dist/' + f)) errs.push('missing icon ' + f);
 if (!existsSync('dist/' + m.chrome_url_overrides?.newtab)) errs.push('missing newtab page');
+// Toolbar button that opens the dashboard (needed where the browser keeps its own new tab, e.g. Opera).
+if (m.background?.service_worker !== 'background.js' || !existsSync('dist/background.js')) errs.push('background must be service_worker background.js and exist in dist');
+if (!m.action?.default_title) errs.push('action.default_title missing');
+if (!existsSync('dist/welcome.html')) errs.push('missing welcome.html (setup guide)');
+for (const page of ['dist/welcome.html']) {
+  const h = readFileSync(page, 'utf8');
+  if (/<script(?![^>]*src=)[^>]*>[^<]/.test(h) || /<style[s>]/i.test(h)) errs.push('inline script/style in ' + page);
+}
 const html = readFileSync('dist/index.html', 'utf8');
 if (/<script(?![^>]*\bsrc=)[^>]*>[^<]/.test(html)) errs.push('inline script in index.html');
 // Third-party fan art must never ship in a public build.

@@ -1,6 +1,7 @@
 // Release packages. Run via `npm run package` (verify + Firefox build run first).
 //   release/neondeck-<v>-chrome.zip   Chrome Web Store upload (from dist/)
 //   release/neondeck-<v>-firefox.zip  addons.mozilla.org upload (from dist-firefox/)
+//   release/neondeck-<v>-opera.zip    addons.opera.com upload (from dist-opera/: no new tab override, not minified)
 //   release/neondeck-<v>-source.zip   source for AMO reviewers (they rebuild and diff; see BUILD.md)
 import { execSync } from 'node:child_process';
 import { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
@@ -30,7 +31,7 @@ const zipDir = (dir) => {
 };
 
 // Source package: tracked files needed to rebuild, nothing personal (no docs/, notes or local tool config).
-const SOURCE_INCLUDE = ['BUILD.md', 'LICENSE', 'LICENSES.md', 'README.md', 'index.html', 'package.json', 'package-lock.json', 'tsconfig.json', 'vite.config.ts', 'public/', 'scripts/', 'src/'];
+const SOURCE_INCLUDE = ['BUILD.md', 'LICENSE', 'LICENSES.md', 'README.md', 'index.html', 'welcome.html', 'package.json', 'package-lock.json', 'tsconfig.json', 'vite.config.ts', 'public/', 'scripts/', 'src/'];
 const tracked = execSync('git ls-files', { encoding: 'utf8' }).split('\n').filter(Boolean);
 const sourceFiles = tracked
   .filter((f) => SOURCE_INCLUDE.some((inc) => (inc.endsWith('/') ? f.startsWith(inc) : f === inc)))
@@ -41,6 +42,7 @@ if (execSync('git status --porcelain -- ' + SOURCE_INCLUDE.join(' '), { encoding
 const outputs = [
   ['chrome', zipDir('dist')],
   ['firefox', zipDir('dist-firefox')],
+  ['opera', zipDir('dist-opera')],
   ['source', { zip: makeZip(sourceFiles), count: sourceFiles.length }],
 ];
 for (const [kind, { zip }] of outputs) if (kind !== 'source' && zip.length > MAX_BYTES) errs.push(`${kind} zip is ${(zip.length / 1048576).toFixed(2)} MB (limit 5 MB)`);

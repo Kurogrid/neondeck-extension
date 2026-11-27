@@ -1,6 +1,6 @@
 # Firefox Add-ons (addons.mozilla.org): NEONDECK
 
-> Updated 2026-11-27. 1.1.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/), approved 2026-11-27; 1.1.1 submitted 2026-11-27. For a new version use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
+> Updated 2026-11-27. 1.1.0 is live (https://addons.mozilla.org/firefox/addon/neondeck/), approved 2026-11-27; 1.1.1 submitted 2026-11-27; 1.1.3 prepared 2026-11-27 (not uploaded yet; version 1.1.2 was never released). For a new version use **Upload New Version**, then update the listing fields below via **Edit Product Page**.
 
 ## Files to upload (Upload New Version)
 - **Add-on file**: `release/neondeck-<version>-firefox.zip`
@@ -68,6 +68,9 @@ English and Turkish interface. Open source (MIT): https://github.com/Kurogrid/ne
 
 NEONDECK is an independent fan-made project. It is not affiliated with, endorsed by or sponsored by CD PROJEKT, Netflix or any other rights holder; theme names refer to the moods they evoke.
 
+## Release notes (version 1.1.3)
+New toolbar button: click it to open NEONDECK in a new tab (handy in browsers that keep their own new tab page). A short setup guide now opens once after install, and you can reopen it any time from Settings → Data. Your settings are kept.
+
 ## Release notes (version 1.1.1)
 Easier to read on every theme: stronger contrast for the date, section titles, quotes and widget text over the live wallpapers (WCAG AA). Your settings are kept.
 
@@ -76,6 +79,11 @@ Arasaka theme: a corporate "Security Login" search panel with an original gate e
 
 ## Release notes (version 1.0.0)
 First stable release. New Samurai theme; live wallpapers with animated HUD overlays and your own wallpaper upload; a music track for every theme (synthesized locally); a local music player for your own files; an optional Spotify radio that loads only when you open it; close buttons on dialogs and visual polish across all themes. Your settings are kept.
+
+## Notes for reviewers (1.1.3)
+- New `background.js` (12 lines, plain JS, `public/background.js`): `action.onClicked` opens `index.html` with `tabs.create`; `runtime.onInstalled` opens `welcome.html` (the setup guide) when `reason === 'install'` only. No new permissions (`tabs.create` needs none), no network, no messaging. In the Firefox build it is declared as `background.scripts`.
+- New page `welcome.html` (Preact, same CSP and build as the new tab). It reads and writes the same `storage` settings (theme choice).
+- Build steps unchanged (`npm ci && npm run build:firefox`).
 
 ## Notes for reviewers (1.1.1)
 - 1.1.1 changes CSS only (colour and backdrop values for text contrast in `src/theme/`). No new permissions, hosts or libraries. Build steps unchanged.

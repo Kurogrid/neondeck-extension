@@ -17,6 +17,7 @@ npm run build:firefox
 - `npm run build` type-checks (`tsc --noEmit`) and bundles with Vite into `dist/` (Chrome build).
 - `scripts/build-firefox.mjs` copies `dist/` to `dist-firefox/` and only rewrites `manifest.json` for Firefox (adds `browser_specific_settings`, removes the Chrome-only `favicon` optional permission).
 - `dist-firefox/` is identical to the submitted Firefox package.
+- Opera: `npm ci && npm run build:opera` builds `dist-opera/` without minification (Opera reviews readable code) and removes the new tab override, which Opera does not allow; `dist-opera/` is identical to the submitted Opera package.
 
 ## Tools used
 - [Vite](https://vite.dev/) (open source, MIT): bundles and minifies the TypeScript/Preact source in `src/`.
