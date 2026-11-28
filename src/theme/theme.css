@@ -2097,7 +2097,7 @@ body {
 .nd-search-arasaka__engine {
   background: transparent;
   border: 0;
-  color: rgba(232, 21, 35, 0.85);
+  color: #ff5c67;
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 600;
@@ -2108,7 +2108,7 @@ body {
 }
 
 .nd-search-arasaka__engine:hover {
-  color: #ff3342;
+  color: #ff858d;
 }
 
 .nd-search-arasaka__engine option {
@@ -2158,7 +2158,7 @@ body {
 }
 
 .nd-search-arasaka__input::placeholder {
-  color: rgba(217, 28, 40, 0.48);
+  color: rgba(255, 118, 128, 0.72);
 }
 
 .nd-search-arasaka__input:focus-visible {
@@ -2170,7 +2170,7 @@ body {
   border: 0;
   border-left: 1px solid rgba(201, 29, 39, 0.35);
   background: transparent;
-  color: #d91c28;
+  color: #ff5c67;
   padding: 0 16px;
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -2183,9 +2183,10 @@ body {
 
 .nd-search-arasaka__go:hover,
 .nd-search-arasaka__go:focus-visible {
-  background: #e81523;
+  background: #ff424e;
   color: #0a080a;
   outline: none;
+  box-shadow: inset 0 0 0 1px #f7ecee;
 }
 
 .nd-search-arasaka__meta {

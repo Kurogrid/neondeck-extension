@@ -76,6 +76,8 @@ test.describe('keyboard', () => {
     await opener.click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
+    // Wait until the dialog has taken focus before tabbing, so the test does not race the open effect.
+    await expect.poll(() => dialog.evaluate((d) => d.contains(document.activeElement))).toBe(true);
     for (let i = 0; i < 80; i++) {
       await page.keyboard.press('Tab');
       expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBe(true);
@@ -83,5 +85,22 @@ test.describe('keyboard', () => {
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
     await expect(opener).toBeFocused();
+  });
+
+  test('the settings drawer pulls focus back in when it has escaped', async ({ page }) => {
+    await open(page);
+    const opener = page.getByTitle('Open settings');
+    await opener.click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    await expect.poll(() => dialog.evaluate((d) => d.contains(document.activeElement))).toBe(true);
+    // Simulate focus escaping to the page behind the drawer, then check both Tab directions.
+    await opener.focus();
+    expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBe(false);
+    await page.keyboard.press('Tab');
+    expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBe(true);
+    await opener.focus();
+    await page.keyboard.press('Shift+Tab');
+    expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBe(true);
   });
 });

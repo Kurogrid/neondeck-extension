@@ -54,6 +54,9 @@ export function useDialog<T extends HTMLElement>(onClose: () => void, active = t
       const first = items[0];
       const last = items[items.length - 1];
       if (!first || !last) return;
+      const current = document.activeElement as HTMLElement | null;
+      // Focus outside the dialog (e.g. Tab pressed before the initial focus landed): pull it back in.
+      if (!current || !el.contains(current)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); return; }
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
